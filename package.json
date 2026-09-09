@@ -1,0 +1,16 @@
+{
+  "name": "com.vastlab.vast-metaverse-tools",
+  "version": "1.0.0",
+  "displayName": "Unity Package for VAST Lab Metaverse Projects",
+  "description": "A brief description of what this tool or package does.",
+  "unity": "2022.3",
+  "author": {
+    "name": "Brandon Coffey",
+    "email": "brandon.coffey@utdallas.edu"
+  },
+  "dependencies": {
+    "com.unity.textmeshpro": "1.4.6",
+    "com.vrmc.vrm": "0.130.1",
+    "com.vrmc.unigltf": "0.130.1"
+  }
+}
