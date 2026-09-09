@@ -11,6 +11,6 @@
   "dependencies": {
     "com.unity.textmeshpro": "1.4.6",
     "com.vrmc.vrm": "0.130.1",
-    "com.vrmc.unigltf": "0.130.1"
+    "com.vrmc.gltf": "0.130.1"
   }
 }
