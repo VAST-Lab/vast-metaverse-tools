@@ -10,7 +10,12 @@
   },
   "dependencies": {
     "com.unity.textmeshpro": "1.4.6",
-    "com.vrmc.vrm": "0.130.1",
-    "com.vrmc.gltf": "0.130.1"
+    "com.vrmc.gltf": "0.130.1",
+    "com.vrmc.vrm": "0.130.1"
+  },
+  "_dependencies_install_instructions": {
+    "com.vrmc.gltf": "https://github.com/vrm-c/UniVRM.git?path=/Assets/UniGLTF#v0.130.1",
+    "com.vrmc.vrm": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRM10#v0.130.1",
+    "com.vastlab.vast-metaverse-tools": "https://github.com/VAST-Lab/vast-metaverse-tools.git"
   }
 }

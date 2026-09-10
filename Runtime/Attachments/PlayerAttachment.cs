@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace VastMetaverseTools.Runtime.Attachments
@@ -12,7 +11,7 @@ namespace VastMetaverseTools.Runtime.Attachments
         [SerializeField] private GameObject _dropPrefab;
         [SerializeField] private bool _canTrash;
         [SerializeField] private bool _canEat;
-        [SerializeField, ShowIf(nameof(_canEat))] private PlayerAttachment _itemAfterEating;
+        [SerializeField] private PlayerAttachment _itemAfterEating;
 
         public AttachmentLocation Location => _location;
         public Vector3 PositionOffset => _positionOffset;
