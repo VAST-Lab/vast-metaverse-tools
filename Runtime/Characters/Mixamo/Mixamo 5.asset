@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8388951f9140d38459785c3a8b09b4c8, type: 3}
+  m_Name: Mixamo 5
+  m_EditorClassIdentifier: 
+  _name: Mixamo 5
+  _icon: {fileID: 21300000, guid: 4abedead35615194a92db62f78756ec2, type: 3}
+  _avatarPrefab: {fileID: 5862394026051636776, guid: 1fa98f2bdde13bb40a6cfbafafe3ab86,
+    type: 3}
