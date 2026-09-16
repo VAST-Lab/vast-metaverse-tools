@@ -51,5 +51,15 @@ namespace VastMetaverseTools.Save
             PlayerPrefs.SetString("PlayerQuests", string.Join(",", _completedQuests));
             PlayerPrefs.Save();
         }
+
+        // TODO: Simplify this custom save data and setup custom logic
+        public static void SetVariable(string key, object value)
+        {
+        }
+
+        public static object GetVariable(string key, object defaultValue)
+        {
+            return defaultValue;
+        }
     }
 }

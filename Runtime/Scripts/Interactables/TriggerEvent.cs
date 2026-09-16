@@ -11,6 +11,7 @@ namespace VastMetaverseTools.Interactables
         [SerializeField] private GameObject _hideWhenInRange;
         [SerializeField] private bool _showHideScaleAnimation;
         [SerializeField] private float _showHideScaleDuration = 0.25f;
+        [SerializeField] private bool _syncEventForAllClients = false;
         [SerializeField] private UnityEvent _enterEvent;
         [SerializeField] private UnityEvent _exitEvent;
 

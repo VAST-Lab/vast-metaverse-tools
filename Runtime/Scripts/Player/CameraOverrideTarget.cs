@@ -8,5 +8,7 @@ namespace VastMetaverseTools.Player
         [SerializeField] private float _fieldOfView = 80f;
         [SerializeField] private float _nearClipPlane = 0.1f;
         [SerializeField] private float _farClipPlane = 5000f;
+
+        public int Priority { get { return _priority; } set { _priority = value; } }
     }
 }

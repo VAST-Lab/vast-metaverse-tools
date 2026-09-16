@@ -16,6 +16,7 @@ namespace VastMetaverseTools.Player
         public bool IsRunInputActive { get; private set; }
 
         private NetworkSyncedObject _syncObject;
+        private bool _isInputEnabled;
 
         private void Awake()
         {
@@ -24,7 +25,7 @@ namespace VastMetaverseTools.Player
 
         private void Update()
         {
-            if (_syncObject != null && !_syncObject.IsOwner) return;
+            if (!_isInputEnabled || (_syncObject != null && !_syncObject.IsOwner)) return;
 
             MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             LookInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
@@ -35,6 +36,15 @@ namespace VastMetaverseTools.Player
             if (Input.GetKeyDown(KeyCode.E)) OnPrimaryInteract?.Invoke();
             if (Input.GetKeyDown(KeyCode.F)) OnSecondaryInteract?.Invoke();
             if (Input.GetButtonDown("Jump")) OnJump?.Invoke();
+        }
+
+        public void SetInputEnabled(bool isEnabled)
+        {
+            _isInputEnabled = isEnabled;
+            MoveInput = Vector2.zero;
+            LookInput = Vector2.zero;
+            IsLookInputActive = false;
+            IsRunInputActive = false;
         }
     }
 }
