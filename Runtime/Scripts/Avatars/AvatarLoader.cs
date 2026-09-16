@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UniVRM10;
-using UniVRM10.VRM10Viewer;
 using VastMetaverseTools.Attachments;
 using VastMetaverseTools.Player;
 
@@ -220,9 +219,9 @@ namespace VastMetaverseTools.Avatars
 
             if (avatarGameObject.TryGetComponent(out _currentVrmInstance))
             {
-                _blinker = gameObject.AddComponent<VRM10Blinker>();
-                _lipSync = gameObject.AddComponent<VRM10AIUEO>();
-                _autoExpression = gameObject.AddComponent<VRM10AutoExpression>();
+                if (_blinker == null) _blinker = gameObject.AddComponent<VRM10Blinker>();
+                if (_lipSync == null) _lipSync = gameObject.AddComponent<VRM10AIUEO>();
+                if (_autoExpression == null) _autoExpression = gameObject.AddComponent<VRM10AutoExpression>();
             }
         }
 
