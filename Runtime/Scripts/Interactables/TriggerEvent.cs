@@ -5,7 +5,7 @@ using VastMetaverseTools.Player;
 
 namespace VastMetaverseTools.Interactables
 {
-    public class TriggerEvent : MonoBehaviour
+    public class TriggerEvent : TriggerBase
     {
         [SerializeField] private GameObject _showWhenInRange;
         [SerializeField] private GameObject _hideWhenInRange;
@@ -33,43 +33,28 @@ namespace VastMetaverseTools.Interactables
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected override void UpdateTrigger(bool insideTrigger, PlayerController player)
         {
-            if (other.TryGetComponent(out PlayerController player))
-            {
-                SetShown(true);
-                _enterEvent?.Invoke();
-            }
-        }
+            if (insideTrigger) _enterEvent?.Invoke();
+            else _exitEvent?.Invoke();
 
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.TryGetComponent(out PlayerController player))
-            {
-                SetShown(false);
-                _exitEvent?.Invoke();
-            }
-        }
-
-        private void SetShown(bool show)
-        {
             if (_showHideScaleAnimation)
             {
                 if (_showWhenInRange != null)
                 {
                     if (_showAnimationRoutine != null) StopCoroutine(_showAnimationRoutine);
-                    _showAnimationRoutine = StartCoroutine(AnimateScale(_showWhenInRange, show ? Vector3.one : Vector3.zero, show));
+                    _showAnimationRoutine = StartCoroutine(AnimateScale(_showWhenInRange, insideTrigger ? Vector3.one : Vector3.zero, insideTrigger));
                 }
 
                 if (_hideWhenInRange != null)
                 {
                     if (_hideAnimationRoutine != null) StopCoroutine(_hideAnimationRoutine);
-                    _hideAnimationRoutine = StartCoroutine(AnimateScale(_hideWhenInRange, show ? Vector3.zero : Vector3.one, !show));
+                    _hideAnimationRoutine = StartCoroutine(AnimateScale(_hideWhenInRange, insideTrigger ? Vector3.zero : Vector3.one, !insideTrigger));
                 }
             }
             else
             {
-                SetShownImmediate(show);
+                SetShownImmediate(insideTrigger);
             }
         }
 

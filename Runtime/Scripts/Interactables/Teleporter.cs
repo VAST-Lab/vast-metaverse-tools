@@ -4,7 +4,7 @@ using VastMetaverseTools.Player;
 
 namespace VastMetaverseTools.Interactables
 {
-    public class Teleporter : MonoBehaviour
+    public class Teleporter : TriggerBase
     {
         [SerializeField] private Transform _targetLocation;
         [SerializeField] private UnityEvent _onTeleportEvent;
@@ -17,9 +17,9 @@ namespace VastMetaverseTools.Interactables
             if (_collider != null) _collider.isTrigger = true;
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected override void UpdateTrigger(bool insideTrigger, PlayerController player)
         {
-            if (other.TryGetComponent(out PlayerController player))
+            if (insideTrigger)
             {
                 player.TeleportTo(_targetLocation);
                 _onTeleportEvent?.Invoke();
