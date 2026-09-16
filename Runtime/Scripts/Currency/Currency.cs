@@ -9,7 +9,7 @@ namespace VastMetaverseTools
     {
         [SerializeField] private TextMeshProUGUI _currencyText;
 
-        public static int userCurrency = 0;
+        public int userCurrency = 0;
 
         void Update()
         {

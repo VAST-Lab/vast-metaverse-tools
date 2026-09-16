@@ -8,11 +8,12 @@ namespace VastMetaverseTools
     {
         [SerializeField] private int price;
 
+        private Currency _currency;
         private int currency;
 
         void Start()
         {
-            currency = Currency.userCurrency;
+            currency = _currency.userCurrency;
         }
 
         private void AttemptPurchase()
