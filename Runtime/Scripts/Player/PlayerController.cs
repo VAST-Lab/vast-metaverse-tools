@@ -6,6 +6,9 @@ namespace VastMetaverseTools.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        // TODO: Add Gravity / Falling Gravity Multipliers
+        // TODO: Add Variable Jump Height checkbox and Max Jump Count (Double jump, etc.)
+        // TODO: Add Ground friction and air control
         [SerializeField] private Transform _cameraTarget;
         [SerializeField] private float _moveSpeed = 5f;
         [SerializeField] private float _runSpeed = 8f;
