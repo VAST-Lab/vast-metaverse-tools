@@ -9,21 +9,21 @@ namespace VastMetaverseTools
     {
         [SerializeField] private TextMeshProUGUI _currencyText;
 
-        private int currency = 0;
+        public static int userCurrency = 0;
 
         void Update()
         {
-            _currencyText.text = "Currency: " + currency.ToString();
+            _currencyText.text = "Currency: " + userCurrency.ToString();
         }
 
         public void AddPoints(int points)
         {
-            currency += points;
+            userCurrency += points;
         }
 
         public void RemovePoints(int points)
         {
-            currency -= points;
+            userCurrency -= points;
         }
     }
 }
