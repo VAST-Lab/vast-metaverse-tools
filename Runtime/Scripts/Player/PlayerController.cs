@@ -93,6 +93,7 @@ namespace VastMetaverseTools.Player
         }
 
         public void TeleportTo(Transform t) => TeleportTo(t.position, t.rotation);
+        public void TeleportTo(Vector3 position) => TeleportTo(position, transform.rotation);
         public void TeleportTo(Vector3 position, Quaternion rotation)
         {
             transform.SetPositionAndRotation(position, rotation);

@@ -53,11 +53,12 @@ namespace VastMetaverseTools.Save
         }
 
         // TODO: Simplify this custom save data and setup custom logic
-        public static void SetVariable(string key, object value)
+        public static void SetVariable<T>(string key, T value)
         {
         }
 
-        public static object GetVariable(string key, object defaultValue)
+
+        public static object GetVariable<T>(string key, T defaultValue)
         {
             return defaultValue;
         }
