@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace VastMetaverseTools
+namespace VastMetaverseTools.External
 {
-    public class OpenOtherSpace : MonoBehaviour
+    public class ExternalTools : MonoBehaviour
     {
+        public static void OpenURL(string url)
+        {
+            // TODO: Open URL
+        }
+
         public static void TeleportToSpace(string spaceId, bool showConfirmPopup = true)
         {
             // TODO: Move between spaces/metaverse sites

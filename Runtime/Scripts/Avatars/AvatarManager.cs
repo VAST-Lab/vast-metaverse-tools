@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using AvatarLibrary;
-using System.Linq;
 
 namespace VastMetaverseTools.Avatars
 {
