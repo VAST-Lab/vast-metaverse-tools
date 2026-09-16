@@ -16,7 +16,7 @@ namespace VastMetaverseTools.Player
         public bool IsRunInputActive { get; private set; }
 
         private NetworkSyncedObject _syncObject;
-        private bool _isInputEnabled;
+        private bool _isInputEnabled = true;
 
         private void Awake()
         {

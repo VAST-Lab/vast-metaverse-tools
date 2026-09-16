@@ -4,7 +4,6 @@
     "references": [
         "Unity.TextMeshPro",
         "VRM10",
-        "VRM10.Samples.VRM10Viewer",
         "UniGLTF"
     ],
     "includePlatforms": [],
