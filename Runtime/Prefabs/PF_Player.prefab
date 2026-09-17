@@ -186,9 +186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraTarget: {fileID: 6671393725076923356}
-  _moveSpeed: 5
-  _runSpeed: 8
-  _jumpHeight: 1.5
+  _moveSpeed: 3
+  _runSpeed: 6.875
+  _jumpHeight: 0.5
   _sprintJumpMultiplier: 1.25
   _airControlSpeed: 2
   _rotationSpeed: 10

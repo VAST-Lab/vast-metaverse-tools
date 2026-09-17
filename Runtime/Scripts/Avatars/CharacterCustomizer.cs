@@ -23,6 +23,7 @@ namespace VastMetaverseTools.Avatars
                 _toggleButton.onClick.RemoveAllListeners();
                 _toggleButton.onClick.AddListener(ToggleAvatarGallery);
             }
+            _avatarGalleryGroup.gameObject.SetActive(true);
         }
 
         private void Start()
