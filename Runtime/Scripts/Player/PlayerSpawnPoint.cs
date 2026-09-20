@@ -5,6 +5,7 @@ namespace VastMetaverseTools
     public class PlayerSpawnPoint : MonoBehaviour
     {
         // TODO: Radius, player settings, etc.
+        [SerializeField] private float _radius = 2f;
 
         public Vector3 GetSpawnPosition() => transform.position;
         public Vector3 GetSpawnForward() => transform.forward;
