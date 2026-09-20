@@ -1,5 +1,6 @@
 using UnityEngine;
 using VastMetaverseTools.Interactables;
+using VastMetaverseTools.Managers;
 using VastMetaverseTools.Networking;
 
 namespace VastMetaverseTools.Player
@@ -57,14 +58,6 @@ namespace VastMetaverseTools.Player
             _input = GetComponent<PlayerInput>();
             _animator = GetComponent<PlayerAnimationController>();
             _syncObject = GetComponent<NetworkSyncedObject>();
-
-            if (_syncObject == null || _syncObject.IsOwner)
-            {
-                LocalPlayer.Instance = gameObject;
-                LocalPlayer.Controller = this;
-                LocalPlayer.Input = _input;
-                LocalPlayer.Interactor = GetComponent<PlayerInteractor>();
-            }
         }
 
         private void OnEnable()

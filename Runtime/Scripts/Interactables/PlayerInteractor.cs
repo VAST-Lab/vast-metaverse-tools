@@ -19,6 +19,7 @@ namespace VastMetaverseTools.Interactables
     {
         [SerializeField] private int _maxVisibleInteractables = 10;
 
+        private PlayerInput _input;
         private IOverrideInteractor _overrideInteractor;
         private Interactable _current;
         private List<Interactable> _visibleInteractables = new List<Interactable>();
@@ -33,21 +34,26 @@ namespace VastMetaverseTools.Interactables
             public readonly int CompareTo(InteractableDistance other) => SqrDistance.CompareTo(other.SqrDistance);
         }
 
-        private void Start()
+        private void Awake()
         {
-            if (LocalPlayer.Input != null)
+            _input = GetComponent<PlayerInput>();
+        }
+
+        private void OnEnable()
+        {
+            if (_input != null)
             {
-                LocalPlayer.Input.OnPrimaryInteract += HandlePrimaryInteract;
-                LocalPlayer.Input.OnSecondaryInteract += HandleSecondaryInteract;
+                _input.OnPrimaryInteract += HandlePrimaryInteract;
+                _input.OnSecondaryInteract += HandleSecondaryInteract;
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            if (LocalPlayer.Input != null)
+            if (_input != null)
             {
-                LocalPlayer.Input.OnPrimaryInteract -= HandlePrimaryInteract;
-                LocalPlayer.Input.OnSecondaryInteract -= HandleSecondaryInteract;
+                _input.OnPrimaryInteract -= HandlePrimaryInteract;
+                _input.OnSecondaryInteract -= HandleSecondaryInteract;
             }
         }
 

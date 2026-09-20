@@ -10,5 +10,8 @@ namespace VastMetaverseTools.Player
         [SerializeField] private float _farClipPlane = 5000f;
 
         public int Priority { get { return _priority; } set { _priority = value; } }
+        public float FieldOfView => _fieldOfView;
+        public float NearClipPlane => _nearClipPlane;
+        public float FarClipPlane => _farClipPlane;
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using VastMetaverseTools.Managers;
 
 namespace VastMetaverseTools.Player
 {
@@ -14,12 +15,12 @@ namespace VastMetaverseTools.Player
 
         private void LateUpdate()
         {
-            if (LocalPlayer.Instance == null) return;
+            if (MetaverseManager.LocalPlayer == null) return;
 
             var camForward = Camera.main.transform.forward;
             var camProjected = Vector3.ProjectOnPlane(camForward, Vector3.up);
 
-            var pos = LocalPlayer.Instance.transform.position + Vector3.up * _yOffset - camProjected;
+            var pos = MetaverseManager.LocalPlayer.transform.position + Vector3.up * _yOffset - camProjected;
             transform.SetPositionAndRotation(pos, Quaternion.LookRotation(camProjected));
         }
     }

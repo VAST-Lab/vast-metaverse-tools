@@ -13,10 +13,11 @@ namespace VastMetaverseTools.Networking
         [SerializeField] private bool _destroyOnOwnerDisconnect;
         [SerializeField] private List<string> _syncVariables;
 
-        public bool IsOwner => true;
+        public bool IsOwner { get; private set; }
 
         public void TakeOwnership()
         {
+            IsOwner = true;
         }
     }
 }

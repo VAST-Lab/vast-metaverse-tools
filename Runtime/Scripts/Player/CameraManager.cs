@@ -9,6 +9,11 @@ namespace VastMetaverseTools.Player
         public static Vector3 CamXZForward => Vector3.ProjectOnPlane(Instance._mainCamera.transform.forward, Vector3.up);
 
         [SerializeField] private Camera _mainCamera;
+        [SerializeField] private float _fieldOfView = 80f;
+        [SerializeField] private float _nearClipPlane = 0.1f;
+        [SerializeField] private float _farClipPlane = 5000f;
+
+        private bool _hasOverride;
 
         private void Awake()
         {
@@ -18,20 +23,8 @@ namespace VastMetaverseTools.Player
                 return;
             }
             Instance = this;
-        }
-
-        private void Update()
-        {
-            // temp fix for testing
-            var spatialChar = FindObjectOfType<CharacterController>();
-            if (spatialChar != null)
-            {
-                Destroy(spatialChar.gameObject);
-            }
-            if (_mainCamera == null)
-            {
-                _mainCamera = gameObject.AddComponent<Camera>();
-            }
+            if (Camera.main != _mainCamera && Camera.main != null) _mainCamera = Camera.main;
+            if (_mainCamera == null) _mainCamera = gameObject.AddComponent<Camera>();
         }
 
         public static void MoveCamera(Vector3 pos, Quaternion rot)
@@ -41,7 +34,18 @@ namespace VastMetaverseTools.Player
                 Debug.LogWarning("CameraManager or MainCamera is not set.");
                 return;
             }
+            if (Instance._hasOverride) return;
             Instance._mainCamera.transform.SetPositionAndRotation(pos, rot);
+        }
+
+        // TODO: Blend/smooth movement between overrides and setup priority system for using multiple overrides
+        public void SetCameraOverride(CameraOverrideTarget target)
+        {
+            _hasOverride = target != null;
+            if (_hasOverride) _mainCamera.transform.SetPositionAndRotation(target.transform.position, target.transform.rotation);
+            _mainCamera.fieldOfView = _hasOverride ? target.FieldOfView : _fieldOfView;
+            _mainCamera.nearClipPlane = _hasOverride ? target.NearClipPlane : _nearClipPlane;
+            _mainCamera.farClipPlane = _hasOverride ? target.FarClipPlane : _farClipPlane;
         }
     }
 }
