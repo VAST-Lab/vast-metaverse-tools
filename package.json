@@ -1,6 +1,6 @@
 {
   "name": "com.vastlab.vast-metaverse-tools",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "displayName": "VAST Lab Metaverse Toolkit",
   "description": "A unity package for VAST Lab Metaverse projects.",
   "unity": "2022.3",
