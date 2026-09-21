@@ -10,6 +10,7 @@ namespace VastMetaverseTools.Managers
         public static MetaverseManager Instance { get; private set; }
 
         [SerializeField] private NetworkSyncedObject _playerPrefab;
+        [SerializeField] private bool _supportCurrency;
 
         public static PlayerController LocalPlayer { get; private set; }
         public static PlayerInput LocalPlayerInput { get; private set; }

@@ -229,7 +229,7 @@ namespace VastMetaverseTools.Player
 
             if (_currentZoom > 0f)
             {
-                if (Physics.SphereCast(_cameraTarget.position, _cameraCollisionRadius, direction, out RaycastHit hit, _currentZoom, _cameraCollisionLayers))
+                if (Physics.SphereCast(_cameraTarget.position, _cameraCollisionRadius, direction, out RaycastHit hit, _currentZoom, _cameraCollisionLayers, QueryTriggerInteraction.Ignore))
                 {
                     desiredPosition = _cameraTarget.position + direction * hit.distance;
                 }
