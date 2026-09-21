@@ -7,10 +7,12 @@ using VastMetaverseTools.UI;
 
 namespace VastMetaverseTools
 {
-    public class SettingsPanel : MonoBehaviour
+    public class Settings : MonoBehaviour
     {
         [SerializeField] private Button _toggleButton;
-        [SerializeField] private CanvasGroup _settingsPanelGroup;
+        [SerializeField] public CanvasGroup _settingsPanelGroup;
+
+        private OptionsManager _optionsManager;
 
         private bool _shown;
 
@@ -22,6 +24,8 @@ namespace VastMetaverseTools
                 _toggleButton.onClick.AddListener(ToggleSettingsPanel);
             }
             _settingsPanelGroup.gameObject.SetActive(true);
+
+            _optionsManager = GetComponent<OptionsManager>();
         }
 
         private void Start()
@@ -29,7 +33,11 @@ namespace VastMetaverseTools
             SetSettingsPanelShown(false);
         }
 
-        private void ToggleSettingsPanel() => SetSettingsPanelShown(!_shown);
+        private void ToggleSettingsPanel()
+        {
+            _optionsManager.ChangePanel(_settingsPanelGroup);
+            //SetSettingsPanelShown(!_shown);
+        }
 
         private void SetSettingsPanelShown(bool shown)
         {

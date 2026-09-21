@@ -8,12 +8,14 @@ namespace VastMetaverseTools.Avatars
     public class CharacterCustomizer : MonoBehaviour
     {
         [SerializeField] private Button _toggleButton;
-        [SerializeField] private CanvasGroup _avatarGalleryGroup;
+        [SerializeField] public CanvasGroup _avatarGalleryGroup;
         [SerializeField] private RectTransform _avatarIconParent;
         [SerializeField] private AvatarItem _avatarIconPrefab;
         [SerializeField] private List<AvatarReference> _avatars;
 
         public AvatarReference GetAvatar(int index) => _avatars[index];
+
+        private OptionsManager _optionsManager;
         private bool _shown;
 
         private void Awake()
@@ -24,6 +26,8 @@ namespace VastMetaverseTools.Avatars
                 _toggleButton.onClick.AddListener(ToggleAvatarGallery);
             }
             _avatarGalleryGroup.gameObject.SetActive(true);
+
+            _optionsManager = GetComponent<OptionsManager>();
         }
 
         private void Start()
@@ -48,7 +52,11 @@ namespace VastMetaverseTools.Avatars
             if (avatarLoader != null) avatarLoader.LoadAvatarReference(_avatars[index]);
         }
 
-        private void ToggleAvatarGallery() => SetAvatarGalleryShown(!_shown);
+        private void ToggleAvatarGallery()
+        {
+            _optionsManager.ChangePanel(_avatarGalleryGroup);
+            //SetAvatarGalleryShown(!_shown);
+        }
         private void SetAvatarGalleryShown(bool shown)
         {
             _shown = shown;
