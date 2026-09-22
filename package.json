@@ -1,21 +1,21 @@
 {
   "name": "com.vastlab.vast-metaverse-tools",
-  "version": "1.0.21",
+  "version": "1.1.1",
   "displayName": "VAST Lab Metaverse Toolkit",
   "description": "A unity package for VAST Lab Metaverse projects.",
-  "unity": "2022.3",
+  "unity": "6000.6",
   "author": {
     "name": "Brandon Coffey",
     "email": "brandon.coffey@utdallas.edu"
   },
   "dependencies": {
     "com.unity.textmeshpro": "1.4.6",
-    "com.vrmc.gltf": "0.130.1",
-    "com.vrmc.vrm": "0.130.1"
+    "com.vrmc.gltf": "0.131.2",
+    "com.vrmc.vrm": "0.131.2"
   },
   "_dependencies_install_instructions": {
-    "com.vrmc.gltf": "https://github.com/vrm-c/UniVRM.git?path=/Assets/UniGLTF#v0.130.1",
-    "com.vrmc.vrm": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRM10#v0.130.1",
+    "com.vrmc.gltf": "https://github.com/vrm-c/UniVRM.git?path=/Packages/UniGLTF#v0.131.2",
+    "com.vrmc.vrm": "https://github.com/vrm-c/UniVRM.git?path=/Packages/VRM10#v0.131.2",
     "com.vastlab.vast-metaverse-tools": "https://github.com/VAST-Lab/vast-metaverse-tools.git"
   }
 }
