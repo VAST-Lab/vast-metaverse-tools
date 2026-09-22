@@ -3,8 +3,10 @@
     "rootNamespace": "VastMetaverseTools",
     "references": [
         "Unity.TextMeshPro",
+        "Unity.InputSystem",
         "VRM10",
-        "UniGLTF"
+        "UniGLTF",
+        "UniGLTF.Utils"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

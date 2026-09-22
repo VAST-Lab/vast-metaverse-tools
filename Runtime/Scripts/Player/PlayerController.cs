@@ -1,6 +1,4 @@
 using UnityEngine;
-using VastMetaverseTools.Interactables;
-using VastMetaverseTools.Managers;
 using VastMetaverseTools.Networking;
 
 namespace VastMetaverseTools.Player
@@ -10,7 +8,18 @@ namespace VastMetaverseTools.Player
         // TODO: Add Gravity / Falling Gravity Multipliers
         // TODO: Add Variable Jump Height checkbox and Max Jump Count (Double jump, etc.)
         // TODO: Add Ground friction and air control
+        [Header("References")]
+        [SerializeField] private NetworkSyncedObject _syncObject;
+        [SerializeField] private PlayerInputReader _input;
+        [SerializeField] private PlayerAnimationController _animator;
+        [SerializeField] private Rigidbody _rb;
         [SerializeField] private Transform _cameraTarget;
+
+        public NetworkSyncedObject SyncedObject => _syncObject;
+        public PlayerInputReader InputReader => _input;
+        public PlayerAnimationController AnimController => _animator;
+
+        [Header("Movement Settings")]
         [SerializeField] private float _moveSpeed = 5f;
         [SerializeField] private float _runSpeed = 8f;
         [SerializeField] private float _jumpHeight = 2f;
@@ -36,10 +45,6 @@ namespace VastMetaverseTools.Player
         [SerializeField] private float _groundCheckRadius = 0.3f;
         [SerializeField] private LayerMask _groundLayers = 1;
 
-        private Rigidbody _rb;
-        private PlayerInput _input;
-        private PlayerAnimationController _animator;
-        private NetworkSyncedObject _syncObject;
         private float _currentZoom = 5f;
         private float _currentAnimationBlend;
         private float _yaw;
@@ -54,20 +59,22 @@ namespace VastMetaverseTools.Player
 
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody>();
-            _input = GetComponent<PlayerInput>();
-            _animator = GetComponent<PlayerAnimationController>();
-            _syncObject = GetComponent<NetworkSyncedObject>();
+            if (_syncObject == null) _syncObject = GetComponent<NetworkSyncedObject>();
+            if (_input == null) _input = GetComponent<PlayerInputReader>();
+            if (_input == null) _input = GetComponentInChildren<PlayerInputReader>();
+            if (_animator == null) _animator = GetComponent<PlayerAnimationController>();
+            if (_animator == null) _animator = GetComponentInChildren<PlayerAnimationController>();
+            if (_rb == null) _rb = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
         {
-            if (_input != null) _input.OnJump += OnJump;
+            if (_input != null) _input.Jump += OnJump;
         }
 
         private void OnDisable()
         {
-            if (_input != null) _input.OnJump -= OnJump;
+            if (_input != null) _input.Jump -= OnJump;
         }
 
         private void Update()
@@ -93,7 +100,7 @@ namespace VastMetaverseTools.Player
         public void TeleportTo(Vector3 position, Quaternion rotation)
         {
             transform.SetPositionAndRotation(position, rotation);
-            _rb.velocity = Vector3.zero;
+            _rb.linearVelocity = Vector3.zero;
             _rb.Sleep();
         }
 
@@ -143,7 +150,7 @@ namespace VastMetaverseTools.Player
                 _cameraReturnProgress = 0f;
             }
 
-            float scroll = Input.mouseScrollDelta.y;
+            float scroll = Mathf.Clamp(_input.ZoomInput, -1f, 1f);
             if (Mathf.Abs(scroll) > 0.01f)
             {
                 _targetZoom -= scroll * _zoomSpeed;
@@ -180,12 +187,12 @@ namespace VastMetaverseTools.Player
 
                 if (_isGrounded)
                 {
-                    _rb.velocity = new Vector3(moveDirection.x * targetSpeed, _rb.velocity.y, moveDirection.z * targetSpeed);
+                    _rb.linearVelocity = new Vector3(moveDirection.x * targetSpeed, _rb.linearVelocity.y, moveDirection.z * targetSpeed);
                 }
                 else
                 {
-                    Vector3 targetVelocity = new Vector3(moveDirection.x * targetSpeed, _rb.velocity.y, moveDirection.z * targetSpeed);
-                    _rb.velocity = Vector3.Lerp(_rb.velocity, targetVelocity, Time.fixedDeltaTime * _airControlSpeed);
+                    Vector3 targetVelocity = new Vector3(moveDirection.x * targetSpeed, _rb.linearVelocity.y, moveDirection.z * targetSpeed);
+                    _rb.linearVelocity = Vector3.Lerp(_rb.linearVelocity, targetVelocity, Time.fixedDeltaTime * _airControlSpeed);
                 }
 
                 Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
@@ -193,7 +200,7 @@ namespace VastMetaverseTools.Player
             }
             else if (_isGrounded)
             {
-                _rb.velocity = new Vector3(0f, _rb.velocity.y, 0f);
+                _rb.linearVelocity = new Vector3(0f, _rb.linearVelocity.y, 0f);
             }
 
             _rb.angularVelocity = Vector3.zero;
@@ -216,7 +223,7 @@ namespace VastMetaverseTools.Player
                 currentJumpHeight *= _sprintJumpMultiplier;
             }
 
-            _rb.velocity = new Vector3(_rb.velocity.x, Mathf.Sqrt(currentJumpHeight * -2f * Physics.gravity.y), _rb.velocity.z);
+            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, Mathf.Sqrt(currentJumpHeight * -2f * Physics.gravity.y), _rb.linearVelocity.z);
 
             if (_animator != null) _animator.Jump();
         }

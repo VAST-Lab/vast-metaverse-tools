@@ -8,11 +8,12 @@ namespace VastMetaverseTools.Avatars
     public class CharacterCustomizer : MonoBehaviour
     {
         [SerializeField] private Button _toggleButton;
-        [SerializeField] public CanvasGroup _avatarGalleryGroup;
+        [SerializeField] private CanvasGroup _avatarGalleryGroup;
         [SerializeField] private RectTransform _avatarIconParent;
         [SerializeField] private AvatarItem _avatarIconPrefab;
         [SerializeField] private List<AvatarReference> _avatars;
 
+        public CanvasGroup AvatarGalleryGroup => _avatarGalleryGroup;
         public AvatarReference GetAvatar(int index) => _avatars[index];
 
         private OptionsManager _optionsManager;
@@ -48,7 +49,7 @@ namespace VastMetaverseTools.Avatars
 
         public void SelectAvatar(int index)
         {
-            var avatarLoader = FindFirstObjectByType<AvatarLoader>();
+            var avatarLoader = FindAnyObjectByType<AvatarLoader>();
             if (avatarLoader != null) avatarLoader.LoadAvatarReference(_avatars[index]);
         }
 

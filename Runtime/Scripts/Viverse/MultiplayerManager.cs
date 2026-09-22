@@ -69,7 +69,7 @@ namespace ViverseSDK.Multiplayer
         // wasn't loaded yet at that point.
         private void Start()
         {
-            loginManager = FindObjectOfType<LoginManager>();
+            loginManager = FindAnyObjectByType<LoginManager>();
 
             // TEMPORARY: auto-create a room once matchmaking is ready, so we can
             // test room creation without building a UI yet. Remove/replace this

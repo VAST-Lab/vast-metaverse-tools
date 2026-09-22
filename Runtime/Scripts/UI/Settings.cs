@@ -10,7 +10,9 @@ namespace VastMetaverseTools
     public class Settings : MonoBehaviour
     {
         [SerializeField] private Button _toggleButton;
-        [SerializeField] public CanvasGroup _settingsPanelGroup;
+        [SerializeField] private CanvasGroup _settingsPanelGroup;
+
+        public CanvasGroup SettingsPanelGroup => _settingsPanelGroup;
 
         private OptionsManager _optionsManager;
 

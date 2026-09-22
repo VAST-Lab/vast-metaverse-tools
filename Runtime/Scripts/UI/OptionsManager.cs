@@ -21,11 +21,11 @@ namespace VastMetaverseTools
         private void Awake()
         {
             _characterCustomizer = GetComponent<CharacterCustomizer>();
-            _avatarPanel = _characterCustomizer._avatarGalleryGroup;
+            _avatarPanel = _characterCustomizer.AvatarGalleryGroup;
             _canvasGroups.Add(_avatarPanel);
 
             _settings = GetComponent<Settings>();
-            _settingsPanel = _settings._settingsPanelGroup;
+            _settingsPanel = _settings.SettingsPanelGroup;
             _canvasGroups.Add(_settingsPanel);
         }
 

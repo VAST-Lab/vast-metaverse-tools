@@ -215,7 +215,7 @@ namespace ViverseSDK.CloudSave
             currentUserAppData = new UserAppDisplayData();
 
             if (loginSample == null)
-                loginSample = FindObjectOfType<LoginSample>();
+                loginSample = FindAnyObjectByType<LoginSample>();
 
             CheckCloudSaveServiceAvailability();
             SetupUI();
@@ -227,7 +227,7 @@ namespace ViverseSDK.CloudSave
         {
             if (cloudSaveService == null)
             {
-                cloudSaveService = FindObjectOfType<CloudSaveService>();
+                cloudSaveService = FindAnyObjectByType<CloudSaveService>();
             }
 
             if (cloudSaveService == null)
@@ -757,7 +757,7 @@ namespace ViverseSDK.CloudSave
         [ContextMenu("Force Create CloudSaveService")]
         public void ForceCreateCloudSaveService()
         {
-            CloudSaveService existingService = FindObjectOfType<CloudSaveService>();
+            CloudSaveService existingService = FindAnyObjectByType<CloudSaveService>();
             if (existingService != null)
             {
                 Debug.Log("[CloudSaveSample] CloudSaveService already exists in scene.");

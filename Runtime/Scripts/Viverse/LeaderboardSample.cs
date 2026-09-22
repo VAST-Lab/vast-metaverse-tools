@@ -105,7 +105,7 @@ public class LeaderboardSample : MonoBehaviour
         }
 
         // Try to find LoginSample in scene and get its appId
-        LoginSample loginSample = FindObjectOfType<LoginSample>();
+        LoginSample loginSample = FindAnyObjectByType<LoginSample>();
         if (loginSample != null && !string.IsNullOrEmpty(loginSample.appId))
         {
             Debug.Log($"[LeaderboardSample] Using appId from LoginSample: {loginSample.appId}");

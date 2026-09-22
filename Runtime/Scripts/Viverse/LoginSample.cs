@@ -193,7 +193,7 @@ namespace ViverseSDK.Login
 
         private void CheckHttpServerAvailability()
         {
-            HttpServer httpServer = FindObjectOfType<HttpServer>();
+            HttpServer httpServer = FindAnyObjectByType<HttpServer>();
             if (httpServer == null)
             {
                 Debug.LogWarning("[LoginSample] HttpServer not found in scene. Creating HttpServer automatically...");
@@ -481,7 +481,7 @@ namespace ViverseSDK.Login
         public void ForceCreateHttpServer()
         {
             // Check if HttpServer already exists
-            HttpServer existingServer = FindObjectOfType<HttpServer>();
+            HttpServer existingServer = FindAnyObjectByType<HttpServer>();
             if (existingServer != null)
             {
                 Debug.Log("[LoginSample] HttpServer already exists in scene.");

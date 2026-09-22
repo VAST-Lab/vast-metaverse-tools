@@ -160,7 +160,7 @@ namespace ViverseSDK.Login
  
         private void InitializeHttpServer()
         {
-            httpServer = FindObjectOfType<HttpServer>();
+            httpServer = FindAnyObjectByType<HttpServer>();
             if (httpServer == null)
             {
                 Debug.LogError("[LoginManager] Cannot find HttpServer script in the scene.");

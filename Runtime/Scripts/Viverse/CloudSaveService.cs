@@ -108,7 +108,7 @@ namespace ViverseSDK.CloudSave
         {
             if (loginManager == null)
             {
-                loginManager = FindObjectOfType<LoginManager>();
+                loginManager = FindAnyObjectByType<LoginManager>();
                 if (loginManager == null)
                 {
                     Debug.LogWarning("[CloudSaveService] LoginManager not found in scene. Creating one automatically...");
@@ -591,7 +591,7 @@ namespace ViverseSDK.CloudSave
                 }
             }
 
-            LoginSample loginSample = FindObjectOfType<LoginSample>();
+            LoginSample loginSample = FindAnyObjectByType<LoginSample>();
             if (loginSample != null && !string.IsNullOrEmpty(loginSample.appId))
             {
                 Debug.Log($"[CloudSaveService] Using App ID from LoginSample: {loginSample.appId}");
