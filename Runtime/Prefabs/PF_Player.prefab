@@ -303,7 +303,7 @@ MonoBehaviour:
   _cameraReturnDelay: 2
   _cameraReturnSpeed: 5
   _maxReturnSpeed: 120
-  _mouseSensitivity: 3
+  _mouseSensitivity: 0.1
   _zoomSpeed: 2
   _zoomSmoothSpeed: 10
   _minZoom: 0
