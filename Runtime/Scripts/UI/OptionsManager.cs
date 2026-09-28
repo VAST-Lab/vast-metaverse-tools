@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using VastMetaverseTools.Avatars;
 using VastMetaverseTools.UI;
 
@@ -27,11 +24,6 @@ namespace VastMetaverseTools
             _settings = GetComponent<Settings>();
             _settingsPanel = _settings.SettingsPanelGroup;
             _canvasGroups.Add(_settingsPanel);
-        }
-
-        private void Start()
-        {
-            Debug.Log(_canvasGroups.Count);
         }
 
         public void ChangePanel(CanvasGroup shownPanel)
