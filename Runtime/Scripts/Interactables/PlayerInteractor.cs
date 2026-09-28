@@ -37,6 +37,7 @@ namespace VastMetaverseTools.Interactables
         private void Awake()
         {
             _input = GetComponent<PlayerInputReader>();
+            if (_input == null) _input = GetComponentInChildren<PlayerInputReader>();
         }
 
         private void OnEnable()

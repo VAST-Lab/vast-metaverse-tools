@@ -7,6 +7,8 @@ namespace VastMetaverseTools.Player
 {
     public class PlayerInputReader : MonoBehaviour
     {
+        [SerializeField] private bool _debugInput;
+
         public event Action PrimaryInteract = delegate { };
         public event Action SecondaryInteract = delegate { };
         public event Action Jump = delegate { };
@@ -14,7 +16,7 @@ namespace VastMetaverseTools.Player
         public Vector2 MoveInput { get; private set; }
         public Vector2 LookInput { get; private set; }
         public float ZoomInput { get; private set; }
-        public bool IsLookInputActive { get; private set; }
+        public bool IsTouching { get; private set; }
         public bool IsRunInputActive { get; private set; }
 
         private NetworkSyncedObject _syncObject;
@@ -42,8 +44,8 @@ namespace VastMetaverseTools.Player
             {
                 MoveInput = Vector2.zero;
                 LookInput = Vector2.zero;
+                IsTouching = false;
                 ZoomInput = 0f;
-                IsLookInputActive = false;
                 IsRunInputActive = false;
             }
         }
@@ -52,37 +54,58 @@ namespace VastMetaverseTools.Player
         {
             if (!CanProcessInput) return;
             MoveInput = value.Get<Vector2>();
+            if (_debugInput) Debug.Log($"MoveInput: {MoveInput}");
         }
 
         private void OnLook(InputValue value)
         {
             if (!CanProcessInput) return;
             LookInput = value.Get<Vector2>();
-            IsLookInputActive = LookInput.sqrMagnitude > 0.01f;
+            if (_debugInput && IsTouching) Debug.Log($"LookInput: {LookInput}");
+        }
+
+        private void OnTouch(InputValue value)
+        {
+            if (!CanProcessInput) return;
+            IsTouching = value.isPressed;
+            if (_debugInput) Debug.Log($"IsTouching: {IsTouching}");
         }
 
         private void OnJump(InputValue value)
         {
             if (!CanProcessInput) return;
-            if (value.Get<float>() > 0.5f) Jump?.Invoke();
+            if (value.Get<float>() > 0.5f)
+            {
+                Jump?.Invoke();
+                if (_debugInput) Debug.Log("Jump");
+            }
         }
 
-        private void OnScroll(InputValue value)
+        private void OnZoom(InputValue value)
         {
             if (!CanProcessInput) return;
             ZoomInput = value.Get<float>();
+            if (_debugInput) Debug.Log($"ZoomInput: {ZoomInput}");
         }
 
         private void OnInteractPrimary(InputValue value)
         {
             if (!CanProcessInput) return;
-            if (value.isPressed) PrimaryInteract?.Invoke();
+            if (value.isPressed)
+            {
+                PrimaryInteract?.Invoke();
+                if (_debugInput) Debug.Log("PrimaryInteract");
+            }
         }
 
         private void OnInteractSecondary(InputValue value)
         {
             if (!CanProcessInput) return;
-            if (value.isPressed) SecondaryInteract?.Invoke();
+            if (value.isPressed)
+            {
+                SecondaryInteract?.Invoke();
+                if (_debugInput) Debug.Log("PrimaryInteract");
+            }
         }
     }
 }

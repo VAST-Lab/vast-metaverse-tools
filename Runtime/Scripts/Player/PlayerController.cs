@@ -126,7 +126,7 @@ namespace VastMetaverseTools.Player
             if (_followOnlyWhenMoving) _isCameraFollowing = moveInput.magnitude >= 0.1f;
             else if (!_isCameraFollowing && moveInput.magnitude >= 0.1f) _isCameraFollowing = true;
 
-            if (_input.IsLookInputActive)
+            if (_input.IsTouching)
             {
                 Vector2 lookDelta = _input.LookInput * _mouseSensitivity;
                 _yaw += lookDelta.x;

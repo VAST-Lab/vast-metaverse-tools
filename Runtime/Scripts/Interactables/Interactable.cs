@@ -41,6 +41,9 @@ namespace VastMetaverseTools.Interactables
 
         public virtual void Interact(GameObject player)
         {
+#if UNITY_EDITOR
+            Debug.Log($"Interact with {name}", gameObject);
+#endif
             if (gameObject.TryGetComponent(out NetworkSyncedObject syncObject)) syncObject.TakeOwnership();
             _interactEvent?.Invoke();
             OnInteract?.Invoke(player);
