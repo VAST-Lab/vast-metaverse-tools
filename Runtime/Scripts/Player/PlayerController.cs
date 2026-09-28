@@ -109,6 +109,7 @@ namespace VastMetaverseTools.Player
         {
             _lockMovement = locked;
             _rb.isKinematic = locked;
+            _animator.SetMoveSpeed(0f);
         }
 
         private void CheckGrounded()

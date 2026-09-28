@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53621c7687140f64b83161ca718520cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: VastMetaverseTools.Runtime::VastMetaverseTools.Player.PlayerInputReader
+  _debugInput: 0
 --- !u!1 &7925969483420885722
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,10 +244,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.25
+  m_Height: 1.6
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!54 &1722668391955395100
 Rigidbody:
   m_ObjectHideFlags: 0
