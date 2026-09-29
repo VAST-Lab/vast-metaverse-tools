@@ -3,6 +3,9 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using VastMetaverseTools.Managers;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using System.Runtime.InteropServices;
+#endif
 
 namespace VastMetaverseTools.External
 {
