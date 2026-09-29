@@ -10,8 +10,10 @@ namespace VastMetaverseTools.Managers
 
         [SerializeField] private PlayerController _playerPrefab;
         [SerializeField] private InputActionAsset _playerInputMapping;
+        [SerializeField] private string _websiteUrl;
         [SerializeField] private bool _supportCurrency;
 
+        public static string WebsiteUrl => Instance._websiteUrl;
         public static PlayerController LocalPlayer { get; private set; }
 
         private void Awake()

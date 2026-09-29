@@ -1,19 +1,53 @@
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using VastMetaverseTools.Managers;
 
 namespace VastMetaverseTools.External
 {
     public class ExternalTools : MonoBehaviour
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void OpenURLInNewTab(string url);
+#endif
+
         public static void OpenURL(string url)
         {
-            // TODO: Open URL
+#if UNITY_WEBGL && !UNITY_EDITOR
+            OpenURLInNewTab(url);
+#else
+            Application.OpenURL(url);
+#endif
         }
 
         public static void TeleportToSpace(string spaceId, bool showConfirmPopup = true)
         {
             // TODO: Move between spaces/metaverse sites
+        }
+
+        public static string BuildURLWithHashParams(Dictionary<string, string> hashParams)
+        {
+            string baseUrl = MetaverseManager.WebsiteUrl;
+
+            if (string.IsNullOrEmpty(baseUrl)) return string.Empty;
+            if (hashParams == null || hashParams.Count == 0) return baseUrl;
+
+            var sb = new StringBuilder(baseUrl);
+            sb.Append('#');
+
+            bool first = true;
+            foreach (KeyValuePair<string, string> kvp in hashParams)
+            {
+                if (!first) sb.Append('&');
+                sb.Append(UnityWebRequest.EscapeURL(kvp.Key));
+                sb.Append('=');
+                sb.Append(UnityWebRequest.EscapeURL(kvp.Value));
+                first = false;
+            }
+
+            return sb.ToString();
         }
 
         // Use this by running "ParseURLHash().TryGetValue("key", out string value)"
