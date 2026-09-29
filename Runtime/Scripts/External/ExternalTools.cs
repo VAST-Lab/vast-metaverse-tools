@@ -27,6 +27,12 @@ namespace VastMetaverseTools.External
             // TODO: Move between spaces/metaverse sites
         }
 
+        public static string BuildURLWithHashParams(string key, string value)
+        {
+            var dict = new Dictionary<string, string>(1) {{ key, value }};
+            return BuildURLWithHashParams(dict);
+        }
+
         public static string BuildURLWithHashParams(Dictionary<string, string> hashParams)
         {
             string baseUrl = MetaverseManager.WebsiteUrl;
@@ -50,8 +56,19 @@ namespace VastMetaverseTools.External
             return sb.ToString();
         }
 
+        public bool ParseURLHash(string key, out string value)
+        {
+            value = "";
+            var hash = ParseURLHash();
+            if (hash.TryGetValue(key, out value))
+            {
+                return true;
+            }
+            return false;
+        }
+
         // Use this by running "ParseURLHash().TryGetValue("key", out string value)"
-        private Dictionary<string, string> ParseURLHash()
+        public Dictionary<string, string> ParseURLHash()
         {
             string url = Application.absoluteURL;
 
