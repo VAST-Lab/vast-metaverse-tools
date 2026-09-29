@@ -56,7 +56,7 @@ namespace VastMetaverseTools.External
             return sb.ToString();
         }
 
-        public bool ParseURLHash(string key, out string value)
+        public static bool ParseURLHash(string key, out string value)
         {
             value = "";
             var hash = ParseURLHash();
@@ -68,7 +68,7 @@ namespace VastMetaverseTools.External
         }
 
         // Use this by running "ParseURLHash().TryGetValue("key", out string value)"
-        public Dictionary<string, string> ParseURLHash()
+        public static Dictionary<string, string> ParseURLHash()
         {
             string url = Application.absoluteURL;
 
