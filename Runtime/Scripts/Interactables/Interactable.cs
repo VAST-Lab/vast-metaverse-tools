@@ -9,7 +9,7 @@ namespace VastMetaverseTools.Interactables
     {
         public static readonly List<Interactable> All = new List<Interactable>();
 
-        [SerializeField] private string _interactText = "Interact";
+        [SerializeField] protected string _interactText = "Interact";
         [SerializeField] private float _interactRadius = 3f;
         [SerializeField] private float _distancePriorityOffset = 0f;
         [SerializeField] private float _visibilityRadius = 5f;

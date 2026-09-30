@@ -1,7 +1,7 @@
 using UnityEngine;
-using VastMetaverseTools.Interactables;
+using VastMetaverseTools.Player;
 
-namespace VastMetaverseTools.Player
+namespace VastMetaverseTools.Interactables
 {
     public class Seat : Interactable, IOverrideInteractor
     {
@@ -9,6 +9,11 @@ namespace VastMetaverseTools.Player
 
         public string PrimaryInteractText => "Stand up";
         public string SecondaryInteractText => null;
+
+        private void Start()
+        {
+            if (_interactText == "Interact") _interactText = "Sit";
+        }
 
         public override void Interact(GameObject player)
         {

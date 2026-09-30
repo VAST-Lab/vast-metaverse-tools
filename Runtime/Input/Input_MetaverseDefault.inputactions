@@ -37,6 +37,16 @@
                     "priority": 0
                 },
                 {
+                    "name": "Sprint",
+                    "type": "Value",
+                    "id": "b61f19c9-4bff-45ae-aa7d-56aa495e5943",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true,
+                    "priority": 0
+                },
+                {
                     "name": "Jump",
                     "type": "Value",
                     "id": "4b63cc64-fc4f-4095-a580-695e5d11ddfa",
@@ -361,6 +371,17 @@
                     "processors": "",
                     "groups": ";Touch",
                     "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1f9a192-6bc5-4c64-8668-a2d2e5dd9349",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

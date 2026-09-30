@@ -88,6 +88,13 @@ namespace VastMetaverseTools.Player
             if (_debugInput) Debug.Log($"ZoomInput: {ZoomInput}");
         }
 
+        private void OnSprint(InputValue value)
+        {
+            if (!CanProcessInput) return;
+            IsRunInputActive = value.isPressed;
+            if (_debugInput) Debug.Log($"IsRunInputActive: {IsRunInputActive}");
+        }
+
         private void OnInteractPrimary(InputValue value)
         {
             if (!CanProcessInput) return;

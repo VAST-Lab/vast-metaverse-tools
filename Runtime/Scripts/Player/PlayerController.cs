@@ -67,6 +67,11 @@ namespace VastMetaverseTools.Player
             if (_rb == null) _rb = GetComponent<Rigidbody>();
         }
 
+        private void Start()
+        {
+            _yaw = transform.eulerAngles.y;
+        }
+
         private void OnEnable()
         {
             if (_input != null) _input.Jump += OnJump;
@@ -100,6 +105,7 @@ namespace VastMetaverseTools.Player
         public void TeleportTo(Vector3 position, Quaternion rotation)
         {
             transform.SetPositionAndRotation(position, rotation);
+            _yaw = rotation.eulerAngles.y;
             _rb.linearVelocity = Vector3.zero;
             _rb.Sleep();
         }
