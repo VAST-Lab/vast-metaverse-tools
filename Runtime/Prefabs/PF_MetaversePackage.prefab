@@ -230,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 3101247979993200420, guid: 91b684137d9dcec4f9e01c069f4cd23c, type: 3}
   _playerInputMapping: {fileID: -944628639613478452, guid: 9034789813c0d964293480c7a3e24b77, type: 3}
+  _websiteUrl: 
   _supportCurrency: 0
 --- !u!1001 &4020149671811784588
 PrefabInstance:
@@ -393,6 +394,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3825783091720155998, guid: f56239021d4a7044198609474dad57b3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4245132312727075747, guid: f56239021d4a7044198609474dad57b3, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -404,6 +409,14 @@ PrefabInstance:
     - target: {fileID: 4731564644909853384, guid: f56239021d4a7044198609474dad57b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381708838379098419, guid: f56239021d4a7044198609474dad57b3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7475655090968929732, guid: f56239021d4a7044198609474dad57b3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25.00003
       objectReference: {fileID: 0}
     - target: {fileID: 7936395476419992088, guid: f56239021d4a7044198609474dad57b3, type: 3}
       propertyPath: m_AnchorMax.x
