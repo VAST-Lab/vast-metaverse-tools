@@ -100,6 +100,12 @@ namespace VastMetaverseTools.Player
             UpdateCamera();
         }
 
+        public void TogglePlayerVisualsShown() => SetPlayerVisualsShown(!_animator.gameObject.activeSelf);
+        public void SetPlayerVisualsShown(bool shown)
+        {
+            _animator.gameObject.SetActive(shown);
+        }
+
         public void TeleportTo(Transform t) => TeleportTo(t.position, t.rotation);
         public void TeleportTo(Vector3 position) => TeleportTo(position, transform.rotation);
         public void TeleportTo(Vector3 position, Quaternion rotation)

@@ -45,8 +45,7 @@ namespace VastMetaverseTools.Managers
 
         public static void ToggleLocalAvatarVisibility()
         {
-            // TODO: Just disable art
-            if (Instance != null) LocalPlayer.gameObject.SetActive(!LocalPlayer.gameObject.activeSelf);
+            if (Instance != null) LocalPlayer.TogglePlayerVisualsShown();
         }
     }
 }
