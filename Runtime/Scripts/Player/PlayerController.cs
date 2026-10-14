@@ -112,7 +112,7 @@ namespace VastMetaverseTools.Player
         {
             transform.SetPositionAndRotation(position, rotation);
             _yaw = rotation.eulerAngles.y;
-            _rb.linearVelocity = Vector3.zero;
+            _rb.MovePosition(Vector3.zero);
             _rb.Sleep();
         }
 

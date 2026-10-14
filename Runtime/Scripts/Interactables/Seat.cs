@@ -23,7 +23,7 @@ namespace VastMetaverseTools.Interactables
                 controller.LockEverything(true);
                 controller.TeleportTo(transform.position + Vector3.up * _seatedPlayerOffset, transform.rotation);
                 interactor.SetOverrideInteractor(this, true);
-                if (player.TryGetComponent(out PlayerAnimationController animator)) animator.SetSeated(true);
+                if (player.GetComponentInChildren<PlayerAnimationController>(true) is PlayerAnimationController animator) animator.SetSeated(true);
             }
         }
 
@@ -34,7 +34,7 @@ namespace VastMetaverseTools.Interactables
                 controller.LockEverything(false);
                 controller.TeleportTo(transform.position + Vector3.up * 0.1f, transform.rotation);
                 interactor.SetOverrideInteractor(this, false);
-                if (player.TryGetComponent(out PlayerAnimationController animator)) animator.SetSeated(false);
+                if (player.GetComponentInChildren<PlayerAnimationController>(true) is PlayerAnimationController animator) animator.SetSeated(false);
             }
             return true;
         }

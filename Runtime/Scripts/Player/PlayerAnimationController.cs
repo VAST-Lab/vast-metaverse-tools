@@ -24,7 +24,6 @@ namespace VastMetaverseTools.Player
         {
             if (_animator != null) _animator.SetBool("Seated", seated);
         }
-
         public void SetGrounded(bool grounded)
         {
             // For jump/landed logic
