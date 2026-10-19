@@ -35,7 +35,7 @@ namespace VastMetaverseTools.Interactables
             );
         }
 
-        public void ShowAllInteractContainers(bool show) => _showAllInteractContainers = false;
+        public void ShowAllInteractContainers(bool show) => _showAllInteractContainers = show;
 
         private InteractableVisual CreateVisual()
         {
