@@ -15,6 +15,7 @@ namespace VastMetaverseTools.Interactables
         [SerializeField] private float _visibilityRadius = 5f;
         [SerializeField] private float _verticalOffset = 0.2f;
         [SerializeField] private float _lockTime;
+        [SerializeField] private float _visualPopupScale = 1f;
 
         [SerializeField] private UnityEvent _interactEvent;
 
@@ -28,6 +29,7 @@ namespace VastMetaverseTools.Interactables
         public float VisibilityRadius => _visibilityRadius;
         public float VerticalOffset => _verticalOffset;
         public virtual bool CanInteract => _canInteract;
+        public float VisualPopupScale => _visualPopupScale;
 
         private void OnEnable()
         {
