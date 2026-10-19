@@ -49,6 +49,11 @@ MonoBehaviour:
   _expandedVisual: {fileID: 2488985513476362948}
   _interactText: {fileID: 2291190205942401577}
   _iconImage: {fileID: 275807564002373669}
+  _scale: {fileID: 735242233520334280}
+  _minScale: 0.3333
+  _maxScale: 1
+  _scaleDistOffset: 0.5
+  _scaleDistMultiplier: 0.5
 --- !u!1 &1663303360504597572
 GameObject:
   m_ObjectHideFlags: 0
