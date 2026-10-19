@@ -11,6 +11,7 @@ namespace VastMetaverseTools.Interactables
         [SerializeField] private InteractableVisual _visualPrefab;
         [SerializeField] private int _defaultCapacity = 20;
         [SerializeField] private int _maxSize = 100;
+        [SerializeField] private bool _showAllInteractContainers;
 
         private ObjectPool<InteractableVisual> _pool;
         private Dictionary<Interactable, InteractableVisual> _activeVisuals;
@@ -33,6 +34,8 @@ namespace VastMetaverseTools.Interactables
                 _maxSize
             );
         }
+
+        public void ShowAllInteractContainers(bool show) => _showAllInteractContainers = false;
 
         private InteractableVisual CreateVisual()
         {
@@ -81,7 +84,7 @@ namespace VastMetaverseTools.Interactables
                     _activeVisuals.Add(item, visual);
                 }
 
-                visual.SetState(item == closestItem);
+                visual.SetState(_showAllInteractContainers || item == closestItem);
             }
         }
     }
