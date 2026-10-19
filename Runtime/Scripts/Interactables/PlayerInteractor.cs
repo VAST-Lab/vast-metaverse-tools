@@ -131,8 +131,13 @@ namespace VastMetaverseTools.Interactables
 
             if (InteractableVisualPoolManager.Instance != null)
             {
-                InteractableVisualPoolManager.Instance.UpdateVisuals(_visibleInteractables, _current);
+                InteractableVisualPoolManager.Instance.UpdateVisuals(_visibleInteractables, _current, this);
             }
+        }
+
+        public void ClickInteractorCustom()
+        {
+            HandlePrimaryInteract();
         }
 
         private void HandlePrimaryInteract()

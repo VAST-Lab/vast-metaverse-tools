@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VastMetaverseTools.Managers;
 
 namespace VastMetaverseTools.Interactables
 {
@@ -45,6 +46,12 @@ namespace VastMetaverseTools.Interactables
             {
                 _interactText.text = _target.InteractText;
             }
+        }
+
+        public void ClickInteractable()
+        {
+            // TODO: Fix this
+            _target.Interact(MetaverseManager.LocalPlayer.gameObject);
         }
     }
 }

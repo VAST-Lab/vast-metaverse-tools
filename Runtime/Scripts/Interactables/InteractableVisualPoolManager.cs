@@ -15,6 +15,7 @@ namespace VastMetaverseTools.Interactables
         private ObjectPool<InteractableVisual> _pool;
         private Dictionary<Interactable, InteractableVisual> _activeVisuals;
         private List<Interactable> _staleKeys;
+        private InteractableVisual _clickableVisual;
 
         private void Awake()
         {
@@ -54,7 +55,7 @@ namespace VastMetaverseTools.Interactables
             if (visual != null) Destroy(visual.gameObject);
         }
 
-        public void UpdateVisuals(List<Interactable> visibleItems, Interactable closestItem)
+        public void UpdateVisuals(List<Interactable> visibleItems, Interactable closestItem, PlayerInteractor interactor)
         {
             _staleKeys.Clear();
             foreach (var kvp in _activeVisuals)
