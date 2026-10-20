@@ -25,9 +25,18 @@ namespace VastMetaverseTools.External
 #endif
         }
 
+        public static void CopyTextToClipboard(string text)
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // Implementation for WebGL
+#else
+            GUIUtility.systemCopyBuffer = text;
+#endif
+        }
+
         public static void TeleportToSpace(string spaceId, bool showConfirmPopup = true)
         {
-            // TODO: Move between spaces/metaverse sites
+            // TODO: Move between spaces/metaverse sites, ignore for now
         }
 
         public static string BuildURLWithHashParams(string key, string value)
