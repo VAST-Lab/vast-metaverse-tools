@@ -50,6 +50,7 @@ MonoBehaviour:
   _visibilityRadius: 10
   _verticalOffset: 0.2
   _lockTime: 0
+  _visualPopupScale: 1
   _interactEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -179,6 +180,7 @@ MonoBehaviour:
   _visualPrefab: {fileID: 5114497818118168446, guid: f700ceaafa996be4f87418b5239f30d1, type: 3}
   _defaultCapacity: 20
   _maxSize: 100
+  _showAllInteractContainers: 0
 --- !u!1 &8630772456879371013
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +304,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6395169519795546222}
     m_Modifications:
+    - target: {fileID: 750311477470187795, guid: f56239021d4a7044198609474dad57b3, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 750311477470187795, guid: f56239021d4a7044198609474dad57b3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7175521830830924091, guid: 103fc381433b771469732603f6e80030, type: 3}
+    - target: {fileID: 750311477470187795, guid: f56239021d4a7044198609474dad57b3, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1893290586654655966, guid: f56239021d4a7044198609474dad57b3, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -393,6 +407,14 @@ PrefabInstance:
     - target: {fileID: 3778589876291730999, guid: f56239021d4a7044198609474dad57b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823068068325694042, guid: f56239021d4a7044198609474dad57b3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -46
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823068068325694042, guid: f56239021d4a7044198609474dad57b3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 3825783091720155998, guid: f56239021d4a7044198609474dad57b3, type: 3}
       propertyPath: m_Sprite
