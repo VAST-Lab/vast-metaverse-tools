@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 3101247979993200420}
   - component: {fileID: 5369977176466826423}
   - component: {fileID: 1375002409261934136}
+  - component: {fileID: -7050811584266010519}
   m_Layer: 30
   m_Name: PF_Player
   m_TagString: Untagged
@@ -351,6 +352,21 @@ MonoBehaviour:
   _destroyOnCreatorDisconnect: 0
   _destroyOnOwnerDisconnect: 1
   _syncVariables: []
+--- !u!114 &-7050811584266010519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858885971535242741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45353ab840314249bbedd251f3830f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HideWhenCameraClose
+  hideDistance: 0.8
+  showDistance: 1
+  centerHeight: 1
 --- !u!1001 &1805350576743152573
 PrefabInstance:
   m_ObjectHideFlags: 0
