@@ -364,9 +364,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45353ab840314249bbedd251f3830f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HideWhenCameraClose
-  hideDistance: 0.8
-  showDistance: 1
-  centerHeight: 1
+  _hideDistance: 1
+  _showDistance: 2
+  _centerHeight: 1
 --- !u!1001 &1805350576743152573
 PrefabInstance:
   m_ObjectHideFlags: 0
