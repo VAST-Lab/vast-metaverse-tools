@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dotVisual: {fileID: 1912418509629269427}
   _expandedVisual: {fileID: 2488985513476362948}
+  _keyVisual: {fileID: 3314407657554247693}
   _interactText: {fileID: 2291190205942401577}
   _iconImage: {fileID: 275807564002373669}
   _scale: {fileID: 735242233520334280}

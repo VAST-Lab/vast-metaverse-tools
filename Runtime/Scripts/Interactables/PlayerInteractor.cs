@@ -151,7 +151,7 @@ namespace VastMetaverseTools.Interactables
             }
             else if (_current != null)
             {
-                _current.Interact(gameObject);
+                if(_current.CanKeyInteract) _current.Interact(gameObject);
             }
             else if (PlayerAttachmentManager.HeldItem != null)
             {

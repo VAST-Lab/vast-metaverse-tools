@@ -9,6 +9,7 @@ namespace VastMetaverseTools.Interactables
     {
         [SerializeField] private GameObject _dotVisual;
         [SerializeField] private GameObject _expandedVisual;
+        [SerializeField] private GameObject _keyVisual;
         [SerializeField] private TMP_Text _interactText;
         [SerializeField] private Image _iconImage;
         [SerializeField] private Transform _scale;
@@ -53,6 +54,7 @@ namespace VastMetaverseTools.Interactables
             if (isClosest && _target != null)
             {
                 _interactText.text = _target.InteractText;
+                if (_target != null && !_target.CanKeyInteract) _keyVisual.SetActive(false);
             }
         }
 
