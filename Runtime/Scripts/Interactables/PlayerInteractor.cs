@@ -25,6 +25,7 @@ namespace VastMetaverseTools.Interactables
         private List<Interactable> _visibleInteractables = new List<Interactable>();
         private List<InteractableDistance> _nearbyInteractables = new List<InteractableDistance>();
         private bool _checkUpdateUI;
+        public bool HasOverrideInteractor => _overrideInteractor != null;
 
         private struct InteractableDistance : IComparable<InteractableDistance>
         {
@@ -62,7 +63,7 @@ namespace VastMetaverseTools.Interactables
         {
             UpdateInteractables();
 
-            if (_checkUpdateUI && _overrideInteractor == null)
+            if (_checkUpdateUI && !HasOverrideInteractor)
             {
                 UIManager.Instance.SetOverridePrompts(PlayerAttachmentManager.HeldItem != null ? "Drop" : null, null);
             }
@@ -142,7 +143,7 @@ namespace VastMetaverseTools.Interactables
 
         private void HandlePrimaryInteract()
         {
-            if (_overrideInteractor != null)
+            if (HasOverrideInteractor)
             {
                 if (_overrideInteractor.OnPrimaryInteract(gameObject))
                 {
@@ -162,7 +163,7 @@ namespace VastMetaverseTools.Interactables
 
         private void HandleSecondaryInteract()
         {
-            if (_overrideInteractor != null)
+            if (HasOverrideInteractor)
             {
                 if (_overrideInteractor.OnSecondaryInteract(gameObject))
                 {

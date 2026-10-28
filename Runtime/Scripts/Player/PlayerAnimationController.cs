@@ -6,44 +6,39 @@ namespace VastMetaverseTools.Player
     {
         [SerializeField] private Animator _animator;
 
-        private static readonly int ThrowTypeHash = Animator.StringToHash("ThrowType");
-        private static readonly int PrepareThrowHash = Animator.StringToHash("ThrowPrepare");
-        private static readonly int ThrowHash = Animator.StringToHash("Throw");
+        private RuntimeAnimatorController _animController;
+
+        private static readonly int JumpHash = Animator.StringToHash("Jump");
+        private static readonly int SeatedHash = Animator.StringToHash("Seated");
+        private static readonly int MoveSpeedHash = Animator.StringToHash("MoveSpeed");
+
+        public void SetAnimationController(RuntimeAnimatorController controller)
+        {
+            if (controller == null) return;
+            _animController = controller;
+            if (_animator != null) _animator.runtimeAnimatorController = _animController;
+        }
 
         public void SetAnimator(Animator animator)
         {
             _animator = animator;
+            if (_animator != null) _animator.runtimeAnimatorController = _animController;
         }
 
-        public void SetMoveSpeed(float moveSpeed)
-        {
-            if (_animator != null) _animator.SetFloat("MoveSpeed", moveSpeed);
-        }
+        // Movement Functions
+        public void SetMoveSpeed(float moveSpeed) { if (_animator != null) SetFloat(MoveSpeedHash, moveSpeed); }
+        public void SetSeated(bool seated) { if (_animator != null) SetBool(SeatedHash, seated); }
+        public void SetGrounded(bool grounded) { /* For jump/landed logic */ }
+        public void Jump() { if (_animator != null) SetTrigger(JumpHash); }
 
-        public void SetSeated(bool seated)
-        {
-            if (_animator != null) _animator.SetBool("Seated", seated);
-        }
-        public void SetGrounded(bool grounded)
-        {
-            // For jump/landed logic
-        }
+        // Generic Functions
+        public void SetBool(int hash, bool value) { if (_animator != null) _animator.SetBool(hash, value); }
+        public void SetFloat(int hash, float value) { if (_animator != null) _animator.SetFloat(hash, value); }
+        public void SetTrigger(int hash) { if (_animator != null) _animator.SetTrigger(hash); }
 
-        public void Jump()
-        {
-            if (_animator != null) _animator.SetTrigger("Jump");
-        }
-
-        public void SetPrepareThrow(int type, bool preparing)
-        {
-            if (_animator == null) return;
-            _animator.SetFloat(ThrowTypeHash, type); // Float for blend tree
-            _animator.SetBool(PrepareThrowHash, preparing);
-        }
-
-        public void TriggerThrow()
-        {
-            if (_animator != null) _animator.SetTrigger(ThrowHash);
-        }
+        // Generic Functions for simplicity, dont use these if using often
+        public void SetBool(string param, bool value) => SetBool(Animator.StringToHash(param), value);
+        public void SetFloat(string param, float value) => SetFloat(Animator.StringToHash(param), value);
+        public void SetTrigger(string param) => SetTrigger(Animator.StringToHash(param));
     }
 }

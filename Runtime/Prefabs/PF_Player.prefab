@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 3101247979993200420}
   - component: {fileID: 5369977176466826423}
   - component: {fileID: 1375002409261934136}
-  - component: {fileID: -7050811584266010519}
+  - component: {fileID: 3912218811477103237}
   m_Layer: 30
   m_Name: PF_Player
   m_TagString: Untagged
@@ -352,7 +352,7 @@ MonoBehaviour:
   _destroyOnCreatorDisconnect: 0
   _destroyOnOwnerDisconnect: 1
   _syncVariables: []
---- !u!114 &-7050811584266010519
+--- !u!114 &3912218811477103237
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -361,9 +361,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8858885971535242741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e45353ab840314249bbedd251f3830f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 1807b84ff92ef5e4196c214a1dca349d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HideWhenCameraClose
+  m_EditorClassIdentifier: VastMetaverseTools.Runtime::VastMetaverseTools.Player.HideWhenCameraClose
   _hideDistance: 1
   _showDistance: 2
   _centerHeight: 1
