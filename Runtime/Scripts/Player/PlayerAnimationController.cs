@@ -5,11 +5,8 @@ namespace VastMetaverseTools.Player
     public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
-        private RuntimeAnimatorController _animController;
 
-        private static readonly int ThrowTypeHash = Animator.StringToHash("ThrowType");
-        private static readonly int PrepareThrowHash = Animator.StringToHash("ThrowPrepare");
-        private static readonly int ThrowHash = Animator.StringToHash("Throw");
+        private RuntimeAnimatorController _animController;
 
         public void SetAnimationController(RuntimeAnimatorController controller)
         {
@@ -43,16 +40,19 @@ namespace VastMetaverseTools.Player
             if (_animator != null) _animator.SetTrigger("Jump");
         }
 
-        public void SetPrepareThrow(int type, bool preparing)
+        public void SetBool(string param, bool value)
         {
-            if (_animator == null) return;
-            _animator.SetFloat(ThrowTypeHash, type); // Float for blend tree
-            _animator.SetBool(PrepareThrowHash, preparing);
+            if (_animator != null) _animator.SetBool(param, value);
         }
 
-        public void TriggerThrow()
+        public void SetFloat(string param, float value)
         {
-            if (_animator != null) _animator.SetTrigger(ThrowHash);
+            if (_animator != null) _animator.SetFloat(param, value);
+        }
+
+        public void SetTrigger(string param)
+        {
+            if (_animator != null) _animator.SetTrigger(param);
         }
     }
 }
