@@ -20,6 +20,7 @@ namespace VastMetaverseTools.Interactables
         [SerializeField] private float _maxScale = 1f;
         [SerializeField] private float _scaleDistOffset = 0.5f;
         [SerializeField] private float _scaleDistMultiplier = 0.5f;
+        [SerializeField] private bool _canShowAltVisual = true;
 
         private Interactable _target;
         private Transform _cameraTransform;
@@ -59,8 +60,9 @@ namespace VastMetaverseTools.Interactables
             _requireUpdate = false;
 
             _dotVisual.SetActive(!isClosest);
-            _expandedVisual.SetActive(isClosest && _target.CanKeyInteract);
-            _altButtonVisual.SetActive(isClosest && !_target.CanKeyInteract);
+            bool altVisualActive = _canShowAltVisual && _target != null && !_target.CanKeyInteract;
+            _expandedVisual.SetActive(isClosest && altVisualActive);
+            _altButtonVisual.SetActive(isClosest && !altVisualActive);
             _altButtonVisualNormal.SetActive(true);
             _altButtonVisualHover.SetActive(false);
 
