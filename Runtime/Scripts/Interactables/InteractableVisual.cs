@@ -60,8 +60,8 @@ namespace VastMetaverseTools.Interactables
 
             _dotVisual.SetActive(!isClosest);
             bool altVisualActive = _target != null && !_target.CanKeyInteract && _target.ShowAltVisual;
-            _expandedVisual.SetActive(isClosest && altVisualActive);
-            _altButtonVisual.SetActive(isClosest && !altVisualActive);
+            _expandedVisual.SetActive(isClosest && !altVisualActive);
+            _altButtonVisual.SetActive(isClosest && altVisualActive);
             _altButtonVisualNormal.SetActive(true);
             _altButtonVisualHover.SetActive(false);
 
