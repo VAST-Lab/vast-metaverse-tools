@@ -24,6 +24,7 @@ namespace VastMetaverseTools.Interactables
         private Interactable _target;
         private Transform _cameraTransform;
         private bool _isClosest;
+        private bool _requireUpdate;
 
         private void Awake()
         {
@@ -48,12 +49,14 @@ namespace VastMetaverseTools.Interactables
         public void SetTarget(Interactable target)
         {
             _target = target;
+            _requireUpdate = true;
         }
 
         public void SetState(bool isClosest)
         {
-            if (_isClosest == isClosest) return;
+            if (_isClosest == isClosest || _requireUpdate) return;
             _isClosest = isClosest;
+            _requireUpdate = false;
 
             _dotVisual.SetActive(!isClosest);
             _expandedVisual.SetActive(isClosest && _target.CanKeyInteract);
