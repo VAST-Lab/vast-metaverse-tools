@@ -48,7 +48,8 @@ MonoBehaviour:
   _dotVisual: {fileID: 1912418509629269427}
   _expandedVisual: {fileID: 2488985513476362948}
   _altButtonVisual: {fileID: 4852695558961038537}
-  _keyVisual: {fileID: 3314407657554247693}
+  _altButtonVisualNormal: {fileID: 1402459417497408514}
+  _altButtonVisualHover: {fileID: 8334350397644266057}
   _interactText: {fileID: 2291190205942401577}
   _altButtonText: {fileID: 2154957964294137861}
   _iconImage: {fileID: 275807564002373669}
