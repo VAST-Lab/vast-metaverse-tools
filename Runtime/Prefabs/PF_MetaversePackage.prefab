@@ -51,6 +51,7 @@ MonoBehaviour:
   _verticalOffset: 0.2
   _lockTime: 0
   _visualPopupScale: 1
+  _canKeyInteract: 1
   _interactEvent:
     m_PersistentCalls:
       m_Calls: []
