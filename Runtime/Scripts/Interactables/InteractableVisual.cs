@@ -10,7 +10,6 @@ namespace VastMetaverseTools.Interactables
         [SerializeField] private GameObject _dotVisual;
         [SerializeField] private GameObject _expandedVisual;
         [SerializeField] private GameObject _altButtonVisual;
-        [SerializeField] private GameObject _keyVisual;
         [SerializeField] private TMP_Text _interactText;
         [SerializeField] private TMP_Text _altButtonText;
         [SerializeField] private Image _iconImage;
@@ -58,7 +57,6 @@ namespace VastMetaverseTools.Interactables
             {
                 _interactText.text = _target.InteractText;
                 _altButtonText.text = _target.InteractText;
-                if (_target != null && !_target.CanKeyInteract) _keyVisual.SetActive(false);
             }
         }
 
