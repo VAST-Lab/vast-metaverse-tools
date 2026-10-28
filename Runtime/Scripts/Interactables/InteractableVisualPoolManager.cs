@@ -84,7 +84,7 @@ namespace VastMetaverseTools.Interactables
                     _activeVisuals.Add(item, visual);
                 }
 
-                visual.SetState(_showAllInteractContainers || item == closestItem);
+                visual.SetState(!interactor.HasOverrideInteractor && (_showAllInteractContainers || item == closestItem));
             }
         }
     }
