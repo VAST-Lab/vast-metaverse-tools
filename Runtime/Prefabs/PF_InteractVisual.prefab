@@ -58,6 +58,7 @@ MonoBehaviour:
   _maxScale: 1
   _scaleDistOffset: 0.5
   _scaleDistMultiplier: 0.5
+  _canShowAltVisual: 1
 --- !u!1 &1402459417497408514
 GameObject:
   m_ObjectHideFlags: 0
