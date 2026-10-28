@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 3101247979993200420, guid: 91b684137d9dcec4f9e01c069f4cd23c, type: 3}
+  _playerAnimController: {fileID: 9100000, guid: 878d62334e75f8345bf6662e0306637b, type: 2}
   _playerInputMapping: {fileID: -944628639613478452, guid: 9034789813c0d964293480c7a3e24b77, type: 3}
   _websiteUrl: 
   _supportCurrency: 0

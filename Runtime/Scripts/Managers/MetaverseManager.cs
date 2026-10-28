@@ -9,6 +9,7 @@ namespace VastMetaverseTools.Managers
         public static MetaverseManager Instance { get; private set; }
 
         [SerializeField] private PlayerController _playerPrefab;
+        [SerializeField] private RuntimeAnimatorController _playerAnimController;
         [SerializeField] private InputActionAsset _playerInputMapping;
         [SerializeField] private string _websiteUrl;
         [SerializeField] private bool _supportCurrency;
@@ -27,6 +28,7 @@ namespace VastMetaverseTools.Managers
             LocalPlayer = Instantiate(_playerPrefab, spawnPos, spawnRot);
             LocalPlayer.SyncedObject.TakeOwnership();
             LocalPlayer.InputReader.SetInputMapping(_playerInputMapping);
+            LocalPlayer.AnimController.SetAnimationController(_playerAnimController);
         }
 
         public static void DisableLocalInput()

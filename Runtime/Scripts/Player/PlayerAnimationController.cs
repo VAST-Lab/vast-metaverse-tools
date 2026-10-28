@@ -5,14 +5,23 @@ namespace VastMetaverseTools.Player
     public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
+        private RuntimeAnimatorController _animController;
 
         private static readonly int ThrowTypeHash = Animator.StringToHash("ThrowType");
         private static readonly int PrepareThrowHash = Animator.StringToHash("ThrowPrepare");
         private static readonly int ThrowHash = Animator.StringToHash("Throw");
 
+        public void SetAnimationController(RuntimeAnimatorController controller)
+        {
+            if (controller == null) return;
+            _animController = controller;
+            if (_animator != null) _animator.runtimeAnimatorController = _animController;
+        }
+
         public void SetAnimator(Animator animator)
         {
             _animator = animator;
+            if (_animator != null) _animator.runtimeAnimatorController = _animController;
         }
 
         public void SetMoveSpeed(float moveSpeed)
