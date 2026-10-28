@@ -54,7 +54,7 @@ namespace VastMetaverseTools.Interactables
 
         public void SetState(bool isClosest)
         {
-            if (_isClosest == isClosest || _requireUpdate) return;
+            if (_isClosest == isClosest && !_requireUpdate) return;
             _isClosest = isClosest;
             _requireUpdate = false;
 
