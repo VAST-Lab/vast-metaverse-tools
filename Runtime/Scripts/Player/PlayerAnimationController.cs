@@ -6,6 +6,11 @@ namespace VastMetaverseTools.Player
     {
         [SerializeField] private Animator _animator;
 
+        public Animator AnimatorComponent => _animator;
+        public float CurrentMoveSpeed { get; private set; }
+        public bool IsSeated { get; private set; }
+        public event System.Action OnJumpTriggered;
+
         private RuntimeAnimatorController _animController;
 
         private static readonly int JumpHash = Animator.StringToHash("Jump");
@@ -26,10 +31,25 @@ namespace VastMetaverseTools.Player
         }
 
         // Movement Functions
-        public void SetMoveSpeed(float moveSpeed) { if (_animator != null) SetFloat(MoveSpeedHash, moveSpeed); }
-        public void SetSeated(bool seated) { if (_animator != null) SetBool(SeatedHash, seated); }
-        public void SetGrounded(bool grounded) { /* For jump/landed logic */ }
-        public void Jump() { if (_animator != null) SetTrigger(JumpHash); }
+        public void SetMoveSpeed(float moveSpeed)
+        {
+            if (_animator != null) SetFloat(MoveSpeedHash, moveSpeed);
+            CurrentMoveSpeed = moveSpeed;
+        }
+        public void SetSeated(bool seated)
+        {
+            if (_animator != null) SetBool(SeatedHash, seated);
+            IsSeated = seated;
+        }
+        public void Jump()
+        {
+            if (_animator != null) SetTrigger(JumpHash);
+            OnJumpTriggered?.Invoke();
+        }
+        public void SetGrounded(bool grounded)
+        {
+            // For jump/landed logic
+        }
 
         // Generic Functions
         public void SetBool(int hash, bool value) { if (_animator != null) _animator.SetBool(hash, value); }

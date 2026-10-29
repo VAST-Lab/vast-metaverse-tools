@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using VastMetaverseTools.Managers;
 using VastMetaverseTools.UI;
 
 namespace VastMetaverseTools.Avatars
@@ -15,6 +17,10 @@ namespace VastMetaverseTools.Avatars
 
         public CanvasGroup AvatarGalleryGroup => _avatarGalleryGroup;
         public AvatarReference GetAvatar(int index) => _avatars[index];
+
+        public int AvatarCount => _avatars != null ? _avatars.Count : 0;
+        public static int SelectedAvatarIndex { get; private set; } = -1;
+        public static event Action<int> OnLocalAvatarSelected;
 
         private OptionsManager _optionsManager;
         private bool _shown;
@@ -49,8 +55,13 @@ namespace VastMetaverseTools.Avatars
 
         public void SelectAvatar(int index)
         {
-            var avatarLoader = FindAnyObjectByType<AvatarLoader>();
-            if (avatarLoader != null) avatarLoader.LoadAvatarReference(_avatars[index]);
+            SelectedAvatarIndex = index;
+            if (MetaverseManager.LocalPlayer != null)
+            {
+                var loader = MetaverseManager.LocalPlayer.GetComponentInChildren<AvatarLoader>();
+                if (loader != null) loader.LoadAvatarReference(_avatars[index]);
+            }
+            OnLocalAvatarSelected?.Invoke(index);
         }
 
         private void ToggleAvatarGallery()

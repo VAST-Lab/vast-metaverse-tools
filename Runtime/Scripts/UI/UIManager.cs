@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VastMetaverseTools.Badges;
 
 namespace VastMetaverseTools.UI
@@ -15,6 +16,7 @@ namespace VastMetaverseTools.UI
         [SerializeField] private GameObject _overridePromptsContainer;
         [SerializeField] private TMP_Text _primaryOverridePromptText;
         [SerializeField] private TMP_Text _secondaryOverridePromptText;
+        [SerializeField] private Button _joinLobbyButton;
 
         private void Awake()
         {
@@ -25,6 +27,17 @@ namespace VastMetaverseTools.UI
         public void OpenShop()
         {
             _shop.Open();
+        }
+
+        public void SetJoinLobbyButton(bool visible, System.Action onClick)
+        {
+            if (_joinLobbyButton == null) return;
+            _joinLobbyButton.gameObject.SetActive(visible);
+            _joinLobbyButton.onClick.RemoveAllListeners();
+            if (onClick != null)
+            {
+                _joinLobbyButton.onClick.AddListener(() => onClick.Invoke());
+            }
         }
 
         public void ShowToast(string message)

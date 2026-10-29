@@ -15,10 +15,6 @@ namespace VastMetaverseTools.Player
         [SerializeField] private Rigidbody _rb;
         [SerializeField] private Transform _cameraTarget;
 
-        public NetworkSyncedObject SyncedObject => _syncObject;
-        public PlayerInputReader InputReader => _input;
-        public PlayerAnimationController AnimController => _animator;
-
         [Header("Movement Settings")]
         [SerializeField] private float _moveSpeed = 5f;
         [SerializeField] private float _runSpeed = 8f;
@@ -44,6 +40,11 @@ namespace VastMetaverseTools.Player
         [SerializeField] private float _groundCheckOffset = 0.1f;
         [SerializeField] private float _groundCheckRadius = 0.3f;
         [SerializeField] private LayerMask _groundLayers = 1;
+
+        public NetworkSyncedObject SyncedObject => _syncObject;
+        public PlayerInputReader InputReader => _input;
+        public PlayerAnimationController AnimController => _animator;
+        public event System.Action<Vector3, Quaternion> OnTeleported;
 
         private float _currentZoom = 5f;
         private float _currentAnimationBlend;
@@ -97,6 +98,7 @@ namespace VastMetaverseTools.Player
 
         private void LateUpdate()
         {
+            if (_syncObject != null && !_syncObject.IsOwner) return;
             UpdateCamera();
         }
 
@@ -114,6 +116,7 @@ namespace VastMetaverseTools.Player
             _yaw = rotation.eulerAngles.y;
             _rb.MovePosition(Vector3.zero);
             _rb.Sleep();
+            OnTeleported?.Invoke(position, rotation);
         }
 
         public void LockMovement(bool locked) => _lockMovement = locked;
