@@ -18,6 +18,7 @@ namespace VastMetaverseTools.Interactables
         [SerializeField] private float _visualPopupScale = 1f;
         [SerializeField] private bool _canKeyInteract = true;
         [SerializeField] private bool _showAltVisual = true;
+        [SerializeField] private bool _overrideRotation = false;
 
         [SerializeField] private UnityEvent _interactEvent;
 
@@ -34,6 +35,7 @@ namespace VastMetaverseTools.Interactables
         public float VisualPopupScale => _visualPopupScale;
         public bool CanKeyInteract => _canKeyInteract;
         public bool ShowAltVisual => _showAltVisual;
+        public bool OverrideRotation => _overrideRotation;
 
         private void OnEnable()
         {

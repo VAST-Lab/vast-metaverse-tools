@@ -30,6 +30,7 @@ namespace VastMetaverseTools.Interactables
         {
             if (Camera.main != null) _cameraTransform = Camera.main.transform;
             if (_scale == null) _scale = transform;
+            
         }
 
         private void Update()
@@ -37,7 +38,7 @@ namespace VastMetaverseTools.Interactables
             if (_target != null)
             {
                 transform.position = _target.transform.position + Vector3.up * _target.VerticalOffset;
-                if (_cameraTransform != null)
+                if (_cameraTransform != null && !_target.OverrideRotation)
                 {
                     transform.rotation = Quaternion.LookRotation(transform.position - _cameraTransform.position);
                     var dist = Vector3.Distance(transform.position, _cameraTransform.position);
@@ -50,6 +51,7 @@ namespace VastMetaverseTools.Interactables
         {
             _target = target;
             _requireUpdate = true;
+            OverriddenRotation();
         }
 
         public void SetState(bool isClosest)
@@ -76,6 +78,11 @@ namespace VastMetaverseTools.Interactables
         {
             // TODO: Fix this
             _target.Interact(MetaverseManager.LocalPlayer.gameObject);
+        }
+
+        public void OverriddenRotation()
+        {
+            if (_target != null && _target.OverrideRotation) transform.rotation = _target.transform.rotation;
         }
     }
 }
