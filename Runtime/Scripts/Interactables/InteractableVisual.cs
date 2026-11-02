@@ -85,7 +85,11 @@ namespace VastMetaverseTools.Interactables
 
         public void OverriddenRotation()
         {
-            if (_target != null && _target.OverrideRotation) transform.rotation = _target.transform.rotation;
+            if (_target != null && _target.OverrideRotation)
+            {
+                transform.rotation = _target.transform.rotation;
+                transform.forward = -transform.forward;
+            }
         }
     }
 }
