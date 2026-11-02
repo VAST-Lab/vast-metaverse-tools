@@ -38,9 +38,12 @@ namespace VastMetaverseTools.Interactables
             if (_target != null)
             {
                 transform.position = _target.transform.position + Vector3.up * _target.VerticalOffset;
-                if (_cameraTransform != null && !_target.OverrideRotation)
+                if (_cameraTransform != null)
                 {
-                    transform.rotation = Quaternion.LookRotation(transform.position - _cameraTransform.position);
+                    if(!_target.OverrideRotation)
+                    {
+                        transform.rotation = Quaternion.LookRotation(transform.position - _cameraTransform.position);
+                    }
                     var dist = Vector3.Distance(transform.position, _cameraTransform.position);
                     transform.localScale = Vector3.one * Mathf.Lerp(_minScale, _maxScale, Mathf.Clamp01(dist * _scaleDistMultiplier - _scaleDistOffset)) * _target.VisualPopupScale;
                 }
