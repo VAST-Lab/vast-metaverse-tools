@@ -52,6 +52,8 @@ MonoBehaviour:
   _lockTime: 0
   _visualPopupScale: 1
   _canKeyInteract: 1
+  _showAltVisual: 1
+  _overrideRotation: 0
   _interactEvent:
     m_PersistentCalls:
       m_Calls: []

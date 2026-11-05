@@ -43,6 +43,11 @@ namespace VastMetaverseTools.Managers
             rotation = spawnForward != Vector3.zero ? Quaternion.LookRotation(spawnForward) : Quaternion.identity;
         }
 
+        public static void SpawnSingleplayerIfNull()
+        {
+            if (Instance != null && LocalPlayer == null) Instance.SpawnSingleplayer();
+        }
+
         public void SpawnSingleplayer()
         {
             GetSpawnTransform(out Vector3 spawnPos, out Quaternion spawnRot);
