@@ -114,8 +114,18 @@ namespace VastMetaverseTools.Player
         {
             transform.SetPositionAndRotation(position, rotation);
             _yaw = rotation.eulerAngles.y;
-            _rb.MovePosition(Vector3.zero);
-            _rb.Sleep();
+            if (_rb != null)
+            {
+                _rb.position = position;
+                _rb.rotation = rotation;
+                if (!_rb.isKinematic)
+                {
+                    _rb.linearVelocity = Vector3.zero;
+                    _rb.angularVelocity = Vector3.zero;
+                }
+                _rb.Sleep();
+            }
+            Physics.SyncTransforms();
             OnTeleported?.Invoke(position, rotation);
         }
 
