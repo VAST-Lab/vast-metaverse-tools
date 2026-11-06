@@ -3,19 +3,12 @@ using VastMetaverseTools.Networking;
 
 namespace VastMetaverseTools.Player
 {
+    [RequireComponent(typeof(NetworkSyncedObject))]
     public class PlayerController : MonoBehaviour
     {
         // TODO: Add Gravity / Falling Gravity Multipliers
         // TODO: Add Variable Jump Height checkbox and Max Jump Count (Double jump, etc.)
         // TODO: Add Ground friction and air control
-        [Header("References")]
-        [SerializeField] private NetworkSyncedObject _syncObject;
-        [SerializeField] private PlayerInputReader _input;
-        [SerializeField] private PlayerAnimationController _animator;
-        [SerializeField] private Rigidbody _rb;
-        [SerializeField] private Transform _cameraTarget;
-
-        [Header("Movement Settings")]
         [SerializeField] private float _moveSpeed = 5f;
         [SerializeField] private float _runSpeed = 8f;
         [SerializeField] private float _jumpHeight = 2f;
@@ -23,6 +16,8 @@ namespace VastMetaverseTools.Player
         [SerializeField] private float _airControlSpeed = 2f;
         [SerializeField] private float _rotationSpeed = 10f;
         [SerializeField] private float _animationBlendSpeed = 5f;
+
+        [Header("Camera")]
         [SerializeField] private bool _followBehindPlayer = true;
         [SerializeField] private bool _followOnlyWhenMoving = true;
         [SerializeField] private float _cameraReturnDelay = 2f;
@@ -37,11 +32,18 @@ namespace VastMetaverseTools.Player
         [SerializeField] private float _cameraCollisionRadius = 0.2f;
         [SerializeField] private LayerMask _cameraCollisionLayers = 1;
 
+        [Header("Ground")]
         [SerializeField] private float _groundCheckOffset = 0.1f;
         [SerializeField] private float _groundCheckRadius = 0.3f;
         [SerializeField] private LayerMask _groundLayers = 1;
 
-        public NetworkSyncedObject SyncedObject => _syncObject;
+        [Header("References")]
+        [SerializeField] private PlayerInputReader _input;
+        [SerializeField] private PlayerAnimationController _animator;
+        [SerializeField] private Rigidbody _rb;
+        [SerializeField] private Transform _cameraTarget;
+
+        public NetworkSyncedObject SyncedObject { get; private set; }
         public PlayerInputReader InputReader => _input;
         public PlayerAnimationController AnimController => _animator;
         public event System.Action<Vector3, Quaternion> OnTeleported;
@@ -60,7 +62,8 @@ namespace VastMetaverseTools.Player
 
         private void Awake()
         {
-            if (_syncObject == null) _syncObject = GetComponent<NetworkSyncedObject>();
+            SyncedObject = GetComponent<NetworkSyncedObject>();
+
             if (_input == null) _input = GetComponent<PlayerInputReader>();
             if (_input == null) _input = GetComponentInChildren<PlayerInputReader>();
             if (_animator == null) _animator = GetComponent<PlayerAnimationController>();
@@ -85,20 +88,20 @@ namespace VastMetaverseTools.Player
 
         private void Update()
         {
-            if (_syncObject != null && !_syncObject.IsOwner) return;
+            if (!SyncedObject.IsOwner) return;
             HandleCameraInput();
         }
 
         private void FixedUpdate()
         {
-            if (_syncObject != null && !_syncObject.IsOwner) return;
+            if (!SyncedObject.IsOwner) return;
             CheckGrounded();
             HandleMovement();
         }
 
         private void LateUpdate()
         {
-            if (_syncObject != null && !_syncObject.IsOwner) return;
+            if (!SyncedObject.IsOwner) return;
             UpdateCamera();
         }
 

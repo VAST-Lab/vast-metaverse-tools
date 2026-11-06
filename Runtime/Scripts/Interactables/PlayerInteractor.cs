@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using VastMetaverseTools.Attachments;
+using VastMetaverseTools.Networking;
 using VastMetaverseTools.Player;
 using VastMetaverseTools.UI;
 
@@ -15,11 +16,12 @@ namespace VastMetaverseTools.Interactables
         bool OnSecondaryInteract(GameObject player);
     }
 
+    [RequireComponent(typeof(PlayerController))]
     public class PlayerInteractor : MonoBehaviour
     {
         [SerializeField] private int _maxVisibleInteractables = 10;
 
-        private PlayerInputReader _input;
+        private PlayerController _playerController;
         private IOverrideInteractor _overrideInteractor;
         private Interactable _current;
         private List<Interactable> _visibleInteractables = new List<Interactable>();
@@ -37,30 +39,25 @@ namespace VastMetaverseTools.Interactables
 
         private void Awake()
         {
-            _input = GetComponent<PlayerInputReader>();
-            if (_input == null) _input = GetComponentInChildren<PlayerInputReader>();
+            _playerController = GetComponent<PlayerController>();
         }
 
         private void OnEnable()
         {
-            if (_input != null)
-            {
-                _input.PrimaryInteract += HandlePrimaryInteract;
-                _input.SecondaryInteract += HandleSecondaryInteract;
-            }
+            _playerController.InputReader.PrimaryInteract += HandlePrimaryInteract;
+            _playerController.InputReader.SecondaryInteract += HandleSecondaryInteract;
         }
 
         private void OnDisable()
         {
-            if (_input != null)
-            {
-                _input.PrimaryInteract -= HandlePrimaryInteract;
-                _input.SecondaryInteract -= HandleSecondaryInteract;
-            }
+            _playerController.InputReader.PrimaryInteract -= HandlePrimaryInteract;
+            _playerController.InputReader.SecondaryInteract -= HandleSecondaryInteract;
         }
 
         private void Update()
         {
+            if (!_playerController.SyncedObject.IsOwner) return;
+
             UpdateInteractables();
 
             if (_checkUpdateUI && !HasOverrideInteractor)
