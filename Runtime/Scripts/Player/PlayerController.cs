@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using VastMetaverseTools.Networking;
 
 namespace VastMetaverseTools.Player
@@ -24,6 +26,8 @@ namespace VastMetaverseTools.Player
         [SerializeField] private float _cameraReturnSpeed = 2f;
         [SerializeField] private float _maxReturnSpeed = 120f;
         [SerializeField] private float _mouseSensitivity = 2f;
+        [Tooltip("Off: hold left mouse and drag to turn the camera. On: the cursor is hidden and moving the mouse turns the camera.")]
+        [SerializeField] private bool _cameraLock;
         [SerializeField] private float _zoomSpeed = 2f;
         [SerializeField] private float _zoomSmoothSpeed = 10f;
         [SerializeField] private float _minZoom = 0f;
@@ -59,6 +63,13 @@ namespace VastMetaverseTools.Player
         private bool _isMoving;
         private bool _lockMovement;
         private bool _isGrounded;
+        private bool _cursorReleased;
+        private bool _isCursorLocked;
+        private float _sensitivityMultiplier = 1f;
+
+        public const string CameraLockPrefKey = "CameraLock";
+        public const string SensitivityPrefKey = "CameraSensitivity";
+        public bool CameraLock => _cameraLock;
 
         private void Awake()
         {
@@ -74,6 +85,8 @@ namespace VastMetaverseTools.Player
         private void Start()
         {
             _yaw = transform.eulerAngles.y;
+            _cameraLock = PlayerPrefs.GetInt(CameraLockPrefKey, _cameraLock ? 1 : 0) == 1;
+            _sensitivityMultiplier = PlayerPrefs.GetFloat(SensitivityPrefKey, 1f);
         }
 
         private void OnEnable()
@@ -84,11 +97,13 @@ namespace VastMetaverseTools.Player
         private void OnDisable()
         {
             if (_input != null) _input.Jump -= OnJump;
+            SetCursorLocked(false);
         }
 
         private void Update()
         {
             if (!SyncedObject.IsOwner) return;
+            HandleCursorLock();
             HandleCameraInput();
         }
 
@@ -132,6 +147,15 @@ namespace VastMetaverseTools.Player
             OnTeleported?.Invoke(position, rotation);
         }
 
+        // Scales the prefab's Mouse Sensitivity, so each project keeps its own base feel.
+        public void SetSensitivityMultiplier(float multiplier) => _sensitivityMultiplier = multiplier;
+
+        public void SetCameraLock(bool locked)
+        {
+            _cameraLock = locked;
+            _cursorReleased = false;
+        }
+
         public void LockMovement(bool locked) => _lockMovement = locked;
         public void LockEverything(bool locked)
         {
@@ -148,6 +172,40 @@ namespace VastMetaverseTools.Player
             if (_animator != null) _animator.SetGrounded(_isGrounded);
         }
 
+        // With camera lock on, the cursor stays hidden and centered. Esc frees it
+        // (e.g. to click the UI); clicking back into the world locks it again.
+        private void HandleCursorLock()
+        {
+            if (!_cameraLock || _lockMovement)
+            {
+                SetCursorLocked(false);
+                return;
+            }
+
+            // The editor and browsers can free the cursor themselves (e.g. on Esc).
+            if (_isCursorLocked && Cursor.lockState != CursorLockMode.Locked) _cursorReleased = true;
+
+            if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                _cursorReleased = true;
+            }
+            else if (_cursorReleased && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame
+                && (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject()))
+            {
+                _cursorReleased = false;
+            }
+
+            SetCursorLocked(!_cursorReleased);
+        }
+
+        private void SetCursorLocked(bool locked)
+        {
+            if (_isCursorLocked == locked) return;
+            _isCursorLocked = locked;
+            Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.visible = !locked;
+        }
+
         private void HandleCameraInput()
         {
             if (_input == null) return;
@@ -155,9 +213,9 @@ namespace VastMetaverseTools.Player
             if (_followOnlyWhenMoving) _isCameraFollowing = moveInput.magnitude >= 0.1f;
             else if (!_isCameraFollowing && moveInput.magnitude >= 0.1f) _isCameraFollowing = true;
 
-            if (_input.IsTouching)
+            if (_input.IsTouching || _isCursorLocked)
             {
-                Vector2 lookDelta = _input.LookInput * _mouseSensitivity;
+                Vector2 lookDelta = _input.LookInput * (_mouseSensitivity * _sensitivityMultiplier);
                 _yaw += lookDelta.x;
                 _pitch -= lookDelta.y;
                 _pitch = Mathf.Clamp(_pitch, -70f, 70f);
